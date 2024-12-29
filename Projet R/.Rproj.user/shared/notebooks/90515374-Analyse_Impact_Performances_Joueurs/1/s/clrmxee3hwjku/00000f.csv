@@ -1,0 +1,6 @@
+"0",""
+"0","# "
+"0","Forwards <- subset(normaldt_RM_Players,normaldt_RM_Players$position==""Forward"")"
+"0",""
+"0","# Les noms de Midfielders"
+"0","kable(head(Forwards[,1]))"

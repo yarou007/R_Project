@@ -1,0 +1,7 @@
+"0",""
+"0",""
+"0",""
+"0","# Les lignes nettoyées sur lesquelles nous allons travailler  "
+"0","normaldt_RM_Players <- RealMadridPlayers[!duplicated(RealMadridPlayers),]"
+"0",""
+"0","kable(head(normaldt_RM_Players[,1:9],6),align = ""l"")"

@@ -1,0 +1,8 @@
+"0",""
+"0","# "
+"0","Defenders <- subset(normaldt_RM_Players,normaldt_RM_Players$position==""Defender"")"
+"0",""
+"0","# Les noms de defenders"
+"0",""
+"0","kable(head(Defenders[,1:5]), align = ""l"", caption = ""Defenders Table"") %>%"
+"0","  kable_styling(position = ""left"", full_width = FALSE)"
