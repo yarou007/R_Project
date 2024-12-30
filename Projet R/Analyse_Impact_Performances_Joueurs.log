@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.15)  25 DEC 2024 22:49
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.15)  30 DEC 2024 01:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -943,52 +943,16 @@ Overfull \hbox (1.22752pt too wide) in paragraph at lines 393--394
 
 
 [3]
-Overfull \hbox (11.05608pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 shirt_number| 
+
+[4]
+Overfull \hbox (5.89397pt too wide) in paragraph at lines 470--470
+ []\TU/lmr/m/n/7 aerial_duels_lost| 
  []
 
 
-Overfull \hbox (5.15208pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 aerial_duels| 
+Overfull \hbox (7.25197pt too wide) in paragraph at lines 470--470
+ []\TU/lmr/m/n/7 aerial_duels_won| 
  []
-
-
-Overfull \hbox (24.78409pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 aerial_duels_lost| 
- []
-
-
-Overfull \hbox (26.38408pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 aerial_duels_won| 
- []
-
-
-Overfull \hbox (4.68808pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 appearances| 
- []
-
-
-Overfull \hbox (28.88008pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 assists_intentional| 
- []
-
-
-Overfull \hbox (61.17609pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 attempts_from_set_pieces| 
- []
-
-
-Overfull \hbox (0.92809pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/8 Goalkeeper| 
- []
-
-
-Overfull \hbox (4.38408pt too wide) in paragraph at lines 470--470
- \TU/lmr/m/n/8 Tchouaméni| 
- []
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 
 Overfull \hbox (23.91681pt too wide) in paragraph at lines 480--480
@@ -997,93 +961,28 @@ Overfull \hbox (23.91681pt too wide) in paragraph at lines 480--480
 
 
 
-[4]
-
 [5]
-Overfull \hbox (27.8886pt too wide) in paragraph at lines 546--547
-[]\TU/lmr/m/n/10 shirt_number  
+Overfull \hbox (5.89397pt too wide) in paragraph at lines 561--561
+ []\TU/lmr/m/n/7 aerial_duels_lost| 
  []
 
 
-Overfull \hbox (7.03636pt too wide) in paragraph at lines 548--549
-[]\TU/lmr/m/n/10 position  
- []
-
-
-Overfull \hbox (20.90858pt too wide) in paragraph at lines 550--551
-[]\TU/lmr/m/n/10 aerial_duels  
- []
-
-
-Overfull \hbox (31.38399pt too wide) in paragraph at lines 552--553
-[]\TU/lmr/m/n/10 aerial_duels_lost  
- []
-
-
-Overfull \hbox (35.79288pt too wide) in paragraph at lines 554--555
-[]\TU/lmr/m/n/10 aerial_duels_won  
- []
-
-
-Overfull \hbox (22.86748pt too wide) in paragraph at lines 556--557
-[]\TU/lmr/m/n/10 appearances  
- []
-
-
-Overfull \hbox (31.14622pt too wide) in paragraph at lines 558--559
-[]\TU/lmr/m/n/10 assists_intentional  
- []
-
-
-Overfull \hbox (56.52164pt too wide) in paragraph at lines 560--561
-[]\TU/lmr/m/n/10 attempts_from_set_pieces  
- []
-
-
-Overfull \hbox (20.95636pt too wide) in paragraph at lines 566--566
-[]|\TU/lmr/m/n/10 Goalkeeper|  
- []
-
-
-Overfull \hbox (11.30635pt too wide) in paragraph at lines 567--567
-[]|\TU/lmr/m/n/10 Defender|  
- []
-
-
-Overfull \hbox (16.45636pt too wide) in paragraph at lines 568--568
-[]|\TU/lmr/m/n/10 Midfielder|  
- []
-
-
-Overfull \hbox (2.31622pt too wide) in paragraph at lines 569--569
-\TU/lmr/m/n/10 Tchouaméni|  
- []
-
-
-Overfull \hbox (16.45636pt too wide) in paragraph at lines 569--569
-[]|\TU/lmr/m/n/10 Midfielder|  
- []
-
-
-Overfull \hbox (16.45636pt too wide) in paragraph at lines 570--570
-[]|\TU/lmr/m/n/10 Midfielder|  
- []
-
-
-Overfull \hbox (11.30635pt too wide) in paragraph at lines 571--571
-[]|\TU/lmr/m/n/10 Defender|  
+Overfull \hbox (7.25197pt too wide) in paragraph at lines 561--561
+ []\TU/lmr/m/n/7 aerial_duels_won| 
  []
 
 
 
-[6] [7]
-Overfull \hbox (47.30879pt too wide) in paragraph at lines 702--710
+[6]
+
+[7]
+Overfull \hbox (47.30879pt too wide) in paragraph at lines 665--673
 []\TU/lmr/m/n/10 clean_sheets, blocked_shots, saves_made, saves_from_penalty, saves_made_caught, , saves_made_from_inside_box,
  []
 
 
-Overfull \hbox (77.24878pt too wide) in paragraph at lines 702--710
-\TU/lmr/m/n/10 saves_made_from_outside_box, saves_made_parried ,goal_kicks gk_successful_distribution, gk_unsuccessful_distribution,
+Overfull \hbox (80.02878pt too wide) in paragraph at lines 665--673
+\TU/lmr/m/n/10 saves_made_from_outside_box, saves_made_parried, goal_kicks, gk_successful_distribution, gk_unsuccessful_distribution,
  []
 
 
@@ -1091,20 +990,52 @@ Overfull \hbox (77.24878pt too wide) in paragraph at lines 702--710
 [8]
 
 [9]
+Overfull \hbox (2.59662pt too wide) in paragraph at lines 888--889
+ []\TU/lmr/m/n/10 BM
+ []
 
-[10] (./Analyse_Impact_Performances_Joueurs.aux)
+
+Overfull \hbox (2.42734pt too wide) in paragraph at lines 896--897
+ []\TU/lmr/m/n/10 xGA
+ []
+
+
+Overfull \hbox (2.59662pt too wide) in paragraph at lines 912--913
+ []\TU/lmr/m/n/10 BM
+ []
+
+
+Overfull \hbox (2.42734pt too wide) in paragraph at lines 920--921
+ []\TU/lmr/m/n/10 xGA
+ []
+
+
+
+[10]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf>
+
+
+[11]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf>
+
+
+[12]
+
+[13] (./Analyse_Impact_Performances_Joueurs.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-11-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21285 strings out of 475963
- 392442 string characters out of 5775530
- 978227 words of memory out of 5000000
- 43785 multiletter control sequences out of 15000+600000
+ 21311 strings out of 475963
+ 394066 string characters out of 5775530
+ 976337 words of memory out of 5000000
+ 43808 multiletter control sequences out of 15000+600000
  564626 words of font info for 90 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,15n,123p,836b,514s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,15n,123p,836b,577s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Analyse_Impact_Performances_Joueurs.pdf (10 pages).
+Output written on Analyse_Impact_Performances_Joueurs.pdf (13 pages).

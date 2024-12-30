@@ -429,8 +429,8 @@ RealMadridPlayers}\label{suppression-des-colonnes-dans-la-premiuxe8re-dataset-re
 \NormalTok{RealMadridPlayers }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(RealMadridPlayers,}\AttributeTok{select =} \SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(team))}
 
 \FunctionTok{kable}\NormalTok{(}
-    \FunctionTok{head}\NormalTok{( RealMadridPlayers[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{],}\DecValTok{6}\NormalTok{ ),}
-    \AttributeTok{caption =} \StringTok{"Tableau des Données 1er 6 lignes avec 9 colonnes"}\NormalTok{,}
+    \FunctionTok{head}\NormalTok{( RealMadridPlayers[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{7}\NormalTok{],}\DecValTok{6}\NormalTok{ ),}
+    \AttributeTok{caption =} \StringTok{"Tableau des Données 1er 6 lignes avec 7 colonnes"}\NormalTok{,}
     \AttributeTok{format =} \StringTok{"latex"}\NormalTok{, }
     \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{,  }\CommentTok{\# Ajouter des traits horizontaux propres}
     \AttributeTok{align =} \StringTok{"c"}    \CommentTok{\# Centrer les colonnes}
@@ -438,7 +438,7 @@ RealMadridPlayers}\label{suppression-des-colonnes-dans-la-premiuxe8re-dataset-re
     \FunctionTok{kable\_styling}\NormalTok{(}
       \AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold\_position"}\NormalTok{),  }\CommentTok{\# Style rayé et position maintenue}
       \AttributeTok{full\_width =} \ConstantTok{TRUE}\NormalTok{,  }\CommentTok{\# Table non étendue à la largeur complète}
-      \AttributeTok{font\_size =} \DecValTok{8}
+      \AttributeTok{font\_size =} \DecValTok{7}
 \NormalTok{    )}
 
 \CommentTok{\#kable(head (RealMadridPlayers[,1:9],6),caption = " Joueurs RM") }
@@ -452,20 +452,20 @@ RealMadridPlayers}\label{suppression-des-colonnes-dans-la-premiuxe8re-dataset-re
 
 \begin{table}[!h]
 \centering
-\caption{\label{tab:Column Suppression}Tableau des Données 1er 6 lignes avec 9 colonnes}
+\caption{\label{tab:Column Suppression}Tableau des Données 1er 6 lignes avec 7 colonnes}
 \centering
-\fontsize{8}{10}\selectfont
-\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\fontsize{7}{9}\selectfont
+\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
 \toprule
-name & shirt\_number & position & aerial\_duels & aerial\_duels\_lost & aerial\_duels\_won & appearances & assists\_intentional & attempts\_from\_set\_pieces\\
+name & shirt\_number & position & aerial\_duels & aerial\_duels\_lost & aerial\_duels\_won & appearances\\
 \midrule
-\cellcolor{gray!10}{Andrii Lunin} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{Goalkeeper} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{21} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA}\\
-Antonio Rüdiger & 22 & Defender & 72 & 23 & 49 & 33 & NA & NA\\
-\cellcolor{gray!10}{Arda Güler} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{Midfielder} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{1}\\
-Aurélien Tchouaméni & 18 & Midfielder & 75 & 24 & 51 & 27 & 1 & NA\\
-\cellcolor{gray!10}{Brahim Díaz} & \cellcolor{gray!10}{21} & \cellcolor{gray!10}{Midfielder} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{9} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{31} & \cellcolor{gray!10}{5} & \cellcolor{gray!10}{NA}\\
+\cellcolor{gray!10}{Andrii Lunin} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{Goalkeeper} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{21}\\
+Antonio Rüdiger & 22 & Defender & 72 & 23 & 49 & 33\\
+\cellcolor{gray!10}{Arda Güler} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{Midfielder} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{10}\\
+Aurélien Tchouaméni & 18 & Midfielder & 75 & 24 & 51 & 27\\
+\cellcolor{gray!10}{Brahim Díaz} & \cellcolor{gray!10}{21} & \cellcolor{gray!10}{Midfielder} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{9} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{31}\\
 \addlinespace
-Dani Carvajal & 2 & Defender & 41 & 19 & 22 & 28 & 3 & NA\\
+Dani Carvajal & 2 & Defender & 41 & 19 & 22 & 28\\
 \bottomrule
 \end{tabu}
 \end{table}
@@ -525,51 +525,41 @@ RealMadridPlayers}\label{suppression-les-lignes-redundantes-dans-la-premiuxe8re-
 \CommentTok{\# Les lignes nettoyées sur lesquelles nous allons travailler  }
 \NormalTok{normaldt\_RM\_Players }\OtherTok{\textless{}{-}}\NormalTok{ RealMadridPlayers[}\SpecialCharTok{!}\FunctionTok{duplicated}\NormalTok{(RealMadridPlayers),]}
 
-\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(normaldt\_RM\_Players[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{9}\NormalTok{],}\DecValTok{6}\NormalTok{),}\AttributeTok{align =} \StringTok{"l"}\NormalTok{)}
+
+\FunctionTok{kable}\NormalTok{(}
+    \FunctionTok{head}\NormalTok{( normaldt\_RM\_Players[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{7}\NormalTok{],}\DecValTok{6}\NormalTok{ ),}
+    \AttributeTok{caption =} \StringTok{"Tableau des Données 1er 6 lignes avec 7 colonnes"}\NormalTok{,}
+    \AttributeTok{format =} \StringTok{"latex"}\NormalTok{, }
+    \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{,  }\CommentTok{\# Ajouter des traits horizontaux propres}
+    \AttributeTok{align =} \StringTok{"c"}    \CommentTok{\# Centrer les colonnes}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+    \FunctionTok{kable\_styling}\NormalTok{(}
+      \AttributeTok{latex\_options =} \FunctionTok{c}\NormalTok{(}\StringTok{"striped"}\NormalTok{, }\StringTok{"hold\_position"}\NormalTok{),  }\CommentTok{\# Style rayé et position maintenue}
+      \AttributeTok{full\_width =} \ConstantTok{TRUE}\NormalTok{,  }\CommentTok{\# Table non étendue à la largeur complète}
+      \AttributeTok{font\_size =} \DecValTok{7}
+\NormalTok{    )}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1342}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0872}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0738}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0872}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1208}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1141}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.0805}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1342}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 16\tabcolsep) * \real{0.1678}}@{}}
-\toprule\noalign{}
-\begin{minipage}[b]{\linewidth}\raggedright
-name
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-shirt\_number
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-position
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-aerial\_duels
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-aerial\_duels\_lost
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-aerial\_duels\_won
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-appearances
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-assists\_intentional
-\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-attempts\_from\_set\_pieces
-\end{minipage} \\
-\midrule\noalign{}
-\endhead
-\bottomrule\noalign{}
-\endlastfoot
-Andrii Lunin & 13 & Goalkeeper & 10 & NA & 10 & 21 & NA & NA \\
-Antonio Rüdiger & 22 & Defender & 72 & 23 & 49 & 33 & NA & NA \\
-Arda Güler & 24 & Midfielder & NA & NA & NA & 10 & NA & 1 \\
-Aurélien Tchouaméni & 18 & Midfielder & 75 & 24 & 51 & 27 & 1 & NA \\
-Brahim Díaz & 21 & Midfielder & 12 & 9 & 3 & 31 & 5 & NA \\
-Dani Carvajal & 2 & Defender & 41 & 19 & 22 & 28 & 3 & NA \\
-\end{longtable}
+\begin{table}[!h]
+\centering
+\caption{\label{tab:Duplicates Suppression2}Tableau des Données 1er 6 lignes avec 7 colonnes}
+\centering
+\fontsize{7}{9}\selectfont
+\begin{tabu} to \linewidth {>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X>{\centering}X}
+\toprule
+name & shirt\_number & position & aerial\_duels & aerial\_duels\_lost & aerial\_duels\_won & appearances\\
+\midrule
+\cellcolor{gray!10}{Andrii Lunin} & \cellcolor{gray!10}{13} & \cellcolor{gray!10}{Goalkeeper} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{10} & \cellcolor{gray!10}{21}\\
+Antonio Rüdiger & 22 & Defender & 72 & 23 & 49 & 33\\
+\cellcolor{gray!10}{Arda Güler} & \cellcolor{gray!10}{24} & \cellcolor{gray!10}{Midfielder} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{NA} & \cellcolor{gray!10}{10}\\
+Aurélien Tchouaméni & 18 & Midfielder & 75 & 24 & 51 & 27\\
+\cellcolor{gray!10}{Brahim Díaz} & \cellcolor{gray!10}{21} & \cellcolor{gray!10}{Midfielder} & \cellcolor{gray!10}{12} & \cellcolor{gray!10}{9} & \cellcolor{gray!10}{3} & \cellcolor{gray!10}{31}\\
+\addlinespace
+Dani Carvajal & 2 & Defender & 41 & 19 & 22 & 28\\
+\bottomrule
+\end{tabu}
+\end{table}
 
 \subsection{Regroupement les joueures par leur positions de
 jeu}\label{regroupement-les-joueures-par-leur-positions-de-jeu}
@@ -632,31 +622,19 @@ Fran García & 20 & Defender & 23 & 15\\
 \bottomrule
 \end{longtable}
 
+Nous referons cette opération pour les milieux de terrain
+``MidFielders'' et les défenseurs ``Defenders''
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\# }
 \NormalTok{Midfielders }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(normaldt\_RM\_Players,normaldt\_RM\_Players}\SpecialCharTok{$}\NormalTok{position}\SpecialCharTok{==}\StringTok{"Midfielder"}\NormalTok{)}
 
 \CommentTok{\# Les noms de Midfielders}
-\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(Midfielders[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]), }\AttributeTok{align =} \StringTok{"l"}\NormalTok{, }\AttributeTok{caption =} \StringTok{"Midfielders Table"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position =} \StringTok{"left"}\NormalTok{, }\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\#kable(head(Midfielders[,1:5]), align = "l", caption = "Midfielders Table") \%\textgreater{}\%}
+\CommentTok{\# kable\_styling(position = "left", full\_width = FALSE)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{longtable}[l]{lllll}
-\caption{\label{tab:Midfielder}Midfielders Table}\\
-\toprule
-name & shirt\_number & position & aerial\_duels & aerial\_duels\_lost\\
-\midrule
-Arda Güler & 24 & Midfielder & NA & NA\\
-Aurélien Tchouaméni & 18 & Midfielder & 75 & 24\\
-Brahim Díaz & 21 & Midfielder & 12 & 9\\
-Dani Ceballos & 19 & Midfielder & 7 & 5\\
-Eduardo Camavinga & 12 & Midfielder & 36 & 18\\
-\addlinespace
-Federico Valverde & 15 & Midfielder & 31 & 10\\
-\bottomrule
-\end{longtable}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -664,25 +642,13 @@ Federico Valverde & 15 & Midfielder & 31 & 10\\
 \NormalTok{Forwards }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(normaldt\_RM\_Players,normaldt\_RM\_Players}\SpecialCharTok{$}\NormalTok{position}\SpecialCharTok{==}\StringTok{"Forward"}\NormalTok{)}
 
 \CommentTok{\# Les noms de Midfielders}
-\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(Forwards[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{]), }\AttributeTok{align =} \StringTok{"l"}\NormalTok{, }\AttributeTok{caption =} \StringTok{"Forwards Table"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position =} \StringTok{"left"}\NormalTok{, }\AttributeTok{full\_width =} \ConstantTok{FALSE}\NormalTok{)}
+\CommentTok{\#kable(head(Forwards[,1:5]), align = "l", caption = "Forwards Table") \%\textgreater{}\%}
+\CommentTok{\#kable\_styling(position = "left", full\_width = FALSE)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{longtable}[l]{lllll}
-\caption{\label{tab:Forward}Forwards Table}\\
-\toprule
-name & shirt\_number & position & aerial\_duels & aerial\_duels\_lost\\
-\midrule
-Gonzalo García & 33 & Forward & NA & NA\\
-José Luis Mato Sanmartín & 14 & Forward & 77 & 36\\
-Lucas Vázquez & 17 & Forward & 10 & 6\\
-Rodrygo Silva de Goes & 11 & Forward & 26 & 21\\
-Vinícius José Paixão de Oliveira Júnior & 7 & Forward & 8 & 7\\
-\addlinespace
-Álvaro Rodríguez & 29 & Forward & NA & NA\\
-\bottomrule
-\end{longtable}
+\subsection{Supprimer les colonnes non nécessaires pour chaque
+groupe}\label{supprimer-les-colonnes-non-nuxe9cessaires-pour-chaque-groupe}
 
 Les critères principaux, les facteurs et les metriques pour chaque
 position sont différents à des autres, et ils sonts similaires dans
@@ -694,14 +660,11 @@ contributions réussies ou infructueuses du gardien. Pour les attaquants,
 ce sont les buts, les passes décisives, les duels remportés, les duels
 perdus, et ainsi de suite pour les milieux de terrain et les défenseurs.
 
-\subsection{Supprimer les colonnes non nécessaires pour chaque
-groupe}\label{supprimer-les-colonnes-non-nuxe9cessaires-pour-chaque-groupe}
-
 Pour les gardiens nous pouvons noter :
 
 clean\_sheets, blocked\_shots, saves\_made, saves\_from\_penalty,
 saves\_made\_caught, , saves\_made\_from\_inside\_box,
-saves\_made\_from\_outside\_box, saves\_made\_parried ,goal\_kicks
+saves\_made\_from\_outside\_box, saves\_made\_parried, goal\_kicks,
 gk\_successful\_distribution, gk\_unsuccessful\_distribution,
 penalties\_faced, penalties\_saved,, penalty\_goals\_conceded,
 penalties\_conceded, goal\_assists, goal\_kicks,
@@ -740,15 +703,15 @@ cette colonne
 \end{verbatim}
 
 Nous mettrons l'accent pour les gardiens sera principalement mis surles
-métriques essentielles concernent leur capacité à défendre, les actions
-défensives, et les clean sheets alors on supprimer les colonnes de
-données qui ne sont pas utiles pour notre analyse :
+métriques essentielles concernent leur capacité à défendre le cage, les
+actions défensives, et les clean sheets alors on supprimer les colonnes
+de données qui ne sont pas utiles pour notre analyse :
 
 \begin{verbatim}
 ## [1] "Dimension Avant suppression"
 ## [1]  6 59
 ## [1] "Dimension Aprés suppression"
-## [1]  6 33
+## [1]  6 32
 \end{verbatim}
 
 Répéter le processus pour toutes les positions :
@@ -773,7 +736,7 @@ analyse
 ## [1] "Dimension Avant suppression"
 ## [1] 11 93
 ## [1] "Dimension Aprés suppression"
-## [1] 11 55
+## [1] 11 53
 \end{verbatim}
 
 \begin{itemize}
@@ -799,7 +762,7 @@ analyse
 ## [1] "Dimension Avant suppression"
 ## [1] 12 94
 ## [1] "Dimension Aprés suppression"
-## [1] 12 48
+## [1] 12 47
 \end{verbatim}
 
 \begin{itemize}
@@ -825,8 +788,18 @@ pour leur performance offensive et leur capacité à marquer des buts:
 ## [1] "Dimension Avant suppression"
 ## [1]  6 90
 ## [1] "Dimension Aprés suppression"
-## [1]  6 28
+## [1]  6 27
 \end{verbatim}
+
+\subsubsection{Remplacement NA valeurs}\label{remplacement-na-valeurs}
+
+\begin{itemize}
+\tightlist
+\item
+  Nous remplacerons toutes les colonnes pour toutes les DATASET
+  contenant des valeurs NA par 0, car nous savons que NA signifie `Not
+  Assigned' et dans notre cas, cela équivalent à 0.
+\end{itemize}
 
 \subsection{Nettoyage du dataset des matches
 RM}\label{nettoyage-du-dataset-des-matches-rm}
@@ -851,32 +824,170 @@ suppression des colonnes inutiles.
   \FunctionTok{return}\NormalTok{(MatchesRM)}
 \NormalTok{\}}
 
-\NormalTok{columnsToDelete }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Date"}\NormalTok{,}\StringTok{"Heure"}\NormalTok{,}\StringTok{"Jour"}\NormalTok{,}\StringTok{"Arbitre"}\NormalTok{,}\StringTok{"Rapport de match"}\NormalTok{,}\StringTok{"Notes"}\NormalTok{)}
+\NormalTok{columnsToDelete }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Date"}\NormalTok{,}\StringTok{"Heure"}\NormalTok{,}\StringTok{"Jour"}\NormalTok{,}\StringTok{"Arbitre"}\NormalTok{,}\StringTok{"Rapport de match"}\NormalTok{,}\StringTok{"Notes"}\NormalTok{,}\StringTok{"Capitaine"}\NormalTok{,}\StringTok{"Formation"}\NormalTok{,}\StringTok{"Formation Adverse"}\NormalTok{)}
 
 \NormalTok{MatchesRM }\OtherTok{\textless{}{-}} \FunctionTok{delete\_columns\_if\_exists}\NormalTok{(MatchesRM, columnsToDelete)}
 \end{Highlighting}
 \end{Shaded}
+
+Dans cette partie, nous créons la variable cible ResultVar
+(``victoire'', ``match nul'' ou ``défaite'') : 1 pour une victoire, 0
+pour une défaite, et 2 pour un match nul, nous créons également notre
+deuxième variable cible, qui correspond à la différence entre les buts
+marqués et les buts encaissés (BM : buts marqués - BE buts encaissés).
+
+Mais avant cela, nous vérifierons que ces variables sont de type
+caractère ou non, puis nous les convertirons en Int.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{MatchesRM }\OtherTok{\textless{}{-}} \FunctionTok{subset}\NormalTok{(MatchesRM, MatchesRM}\SpecialCharTok{$}\NormalTok{Comp}\SpecialCharTok{==}\StringTok{"La Liga"}\NormalTok{)}
+\CommentTok{\# Verifier si les variables sont integer ou pas }
 
+\FunctionTok{typeof}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{BE)}
+\FunctionTok{typeof}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{BM)}
 
-\NormalTok{delete\_columns}\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(MatchesRM, columnsToDelete) \{}
-  \CommentTok{\# si existe column {-}\textgreater{} put it in exisiting columns }
-\NormalTok{  existing\_columns }\OtherTok{\textless{}{-}}\NormalTok{ columnsToDelete[columnsToDelete }\SpecialCharTok{\%in\%} \FunctionTok{colnames}\NormalTok{(MatchesRM)] }\CommentTok{\# explicitement }
-  
-   \CommentTok{\# Suppression les colonnes souhaité }
-\NormalTok{  MatchesRM }\OtherTok{\textless{}{-}}\NormalTok{ MatchesRM[, }\SpecialCharTok{!}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(MatchesRM) }\SpecialCharTok{\%in\%}\NormalTok{ existing\_columns)]}
-  
-  \FunctionTok{return}\NormalTok{(MatchesRM)}
-\NormalTok{\}}
+\CommentTok{\# Converting BE BM to Int }
+\NormalTok{MatchesRM}\SpecialCharTok{$}\NormalTok{BE }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{BE)}
+\FunctionTok{typeof}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{BE)}
+\NormalTok{MatchesRM}\SpecialCharTok{$}\NormalTok{BM }\OtherTok{\textless{}{-}} \FunctionTok{as.integer}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{BM)}
+\FunctionTok{typeof}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{BM)}
 
-\NormalTok{columnsToDelete }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Date"}\NormalTok{,}\StringTok{"Heure"}\NormalTok{,}\StringTok{"Jour"}\NormalTok{,}\StringTok{"Arbitre"}\NormalTok{,}\StringTok{"Rapport de match"}\NormalTok{,}\StringTok{"Notes"}\NormalTok{)}
+\CommentTok{\# Creation les variabels cibles}
+\CommentTok{\# Assuming MatchesRM$Resultat contains "V", "D", or "N"}
+\NormalTok{MatchesRM}\SpecialCharTok{$}\NormalTok{Target1 }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{Résultat }\SpecialCharTok{==} \StringTok{"V"}\NormalTok{, }\DecValTok{1}\NormalTok{, }
+                        \FunctionTok{ifelse}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{Résultat }\SpecialCharTok{==} \StringTok{"D"}\NormalTok{, }\DecValTok{0}\NormalTok{, }
+                        \FunctionTok{ifelse}\NormalTok{(MatchesRM}\SpecialCharTok{$}\NormalTok{Résultat }\SpecialCharTok{==} \StringTok{"N"}\NormalTok{, }\DecValTok{2}\NormalTok{,}\ConstantTok{NA}\NormalTok{) ))}
 
-\NormalTok{MatchesRM }\OtherTok{\textless{}{-}} \FunctionTok{delete\_columns\_if\_exists}\NormalTok{(MatchesRM, columnsToDelete)}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{head}\NormalTok{(MatchesRM[,}\DecValTok{4}\SpecialCharTok{:}\DecValTok{13}\NormalTok{],}\DecValTok{6}\NormalTok{),}\AttributeTok{caption =} \StringTok{"Matches Real Madrid"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## [1] "character"
+## [1] "character"
+## [1] "integer"
+## [1] "integer"
+\end{verbatim}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.1125}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0375}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0375}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.2000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0500}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0500}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.0625}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.1250}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.2250}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 18\tabcolsep) * \real{0.1000}}@{}}
+\caption{Matches Real Madrid}\tabularnewline
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Résultat
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+BM
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+BE
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Adversaire
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+xG
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+xGA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Poss
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Affluence
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Formation adverse
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Target1
+\end{minipage} \\
+\midrule\noalign{}
+\endfirsthead
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Résultat
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+BM
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+BE
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Adversaire
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+xG
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+xGA
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Poss
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Affluence
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Formation adverse
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedleft
+Target1
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+V & 2 & 0 & Athletic Club & 0.9 & 0.4 & 54 & 48,927 & 4-2-3-1 & 1 \\
+V & 3 & 1 & Almería & 2.0 & 1.3 & 57 & 17,561 & 4-2-3-1 & 1 \\
+V & 1 & 0 & Celta Vigo & 1.4 & 1.2 & 63 & 23,057 & 5-3-2 & 1 \\
+V & 2 & 1 & Getafe & 2.8 & 0.4 & 76 & 66,747 & 4-1-3-2 & 1 \\
+V & 2 & 1 & Real Sociedad & 2.0 & 1.6 & 52 & 70,092 & 4-3-3 & 1 \\
+D & 1 & 3 & Atlético Madrid & 1.0 & 1.4 & 63 & 69,082 & 5-3-2 & 0 \\
+\end{longtable}
+
+\section{Analyse de Données}\label{analyse-de-donnuxe9es}
+
+\subsection{Appliquer PCA/ACP (Analyse en Composantes
+Principales)}\label{appliquer-pcaacp-analyse-en-composantes-principales}
+
+L'Analyse en Composantes Principales (PCA) est utilisée pour réduire la
+dimensionnalité des données tout en conservant le maximum d'information
+possible.
+
+\subsubsection{Standardiser les
+données}\label{standardiser-les-donnuxe9es}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{GK\_PCA }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(GoalKeepers, }\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Examiner les résultats de
+PCA}\label{examiner-les-ruxe9sultats-de-pca}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(GK\_PCA)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Importance of components:
+##                           PC1    PC2     PC3       PC4      PC5       PC6
+## Standard deviation     5.1724 1.8835 1.30318 1.271e-15 2.24e-16 3.336e-32
+## Proportion of Variance 0.8361 0.1109 0.05307 0.000e+00 0.00e+00 0.000e+00
+## Cumulative Proportion  0.8361 0.9469 1.00000 1.000e+00 1.00e+00 1.000e+00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(GK\_PCA, }\AttributeTok{main =} \StringTok{"Variance expliquée par les composantes principales"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{biplot}\NormalTok{(GK\_PCA)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf}
 
 \end{document}

@@ -1,9 +1,9 @@
 {
     "id": "D942B96E",
-    "path": "C:/Users/21655/Desktop/Projet_DS_Yassine/Projet R/Analyse_Impact_Performances_Joueurs.Rmd",
+    "path": "C:/Users/21655/Desktop/safe/Projet_DS_Yassine/Projet_DS_Yassine/Projet R/Analyse_Impact_Performances_Joueurs.Rmd",
     "project_path": "Analyse_Impact_Performances_Joueurs.Rmd",
     "type": "r_markdown",
-    "hash": "2021932341",
+    "hash": "4130395431",
     "contents": "",
     "dirty": false,
     "created": 1734985228910.0,
@@ -13,17 +13,17 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "524,58",
-        "scrollLine": "512",
+        "cursorPosition": "611,53",
+        "scrollLine": "602",
         "working_dir": "current",
-        "last_setup_crc32": "3f1da305bb338d19"
+        "last_setup_crc32": "4dbc6ed3bb338d19"
     },
     "folds": "",
-    "lastKnownWriteTime": 1735170930,
+    "lastKnownWriteTime": 1735526573,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1735170931163,
+    "last_content_update": 1735526573364,
     "read_only": false,
     "read_only_alternatives": []
 }
