@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.15)  30 DEC 2024 01:15
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.15)  30 DEC 2024 23:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -921,6 +921,8 @@ LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
 
 
 [2]
+
+[3]
 Overfull \hbox (1.69121pt too wide) in paragraph at lines 361--362
 []\TU/lmr/m/n/10 BM  
  []
@@ -941,8 +943,6 @@ Overfull \hbox (1.22752pt too wide) in paragraph at lines 393--394
  []
 
 
-
-[3]
 
 [4]
 Overfull \hbox (5.89397pt too wide) in paragraph at lines 470--470
@@ -990,6 +990,8 @@ Overfull \hbox (80.02878pt too wide) in paragraph at lines 665--673
 [8]
 
 [9]
+
+[10]
 Overfull \hbox (2.59662pt too wide) in paragraph at lines 888--889
  []\TU/lmr/m/n/10 BM
  []
@@ -1011,12 +1013,9 @@ Overfull \hbox (2.42734pt too wide) in paragraph at lines 920--921
 
 
 
-[10]
+[11]
 File: Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
 <use Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf>
-
-
-[11]
 File: Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type pdf)
 <use Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf>
 
@@ -1030,12 +1029,12 @@ L3 programming layer <2024-11-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21311 strings out of 475963
- 394066 string characters out of 5775530
- 976337 words of memory out of 5000000
- 43808 multiletter control sequences out of 15000+600000
+ 21317 strings out of 475963
+ 394145 string characters out of 5775530
+ 973487 words of memory out of 5000000
+ 43814 multiletter control sequences out of 15000+600000
  564626 words of font info for 90 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,15n,123p,836b,577s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,15n,123p,836b,579s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
 Output written on Analyse_Impact_Performances_Joueurs.pdf (13 pages).

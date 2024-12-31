@@ -296,8 +296,8 @@ delete_columns_if_exists<- function(GoalKeepers, columnsToDelete) {
   return(GoalKeepers)
 }
 
-columnsToDelete <- c("name","position","shirt_number", "backward_passes", "goal_assists", "goal_kicks", "goals_from_inside_box", "headed_goals", "home_goals", "offsides", "open_play_passes", "overruns", "putthrough_blocked_distribution", "putthrough_blocked_distribution_won", "recoveries", "red_cards_2nd_yellow", "second_goal_assists", "shots_on_target_inc_goals", "straight_red_cards", "substitute_off", "substitute_on", "successful_crosses_corners", "successful_crosses_open_play", "successful_dribbles", "successful_launches", "successful_open_play_passes", "successful_passes_opposition_half", "successful_passes_own_half", "successful_short_passes", "tackles_lost",
-"through_balls", "times_tackled", "total_fouls_conceded", "total_fouls_won", "total_losses_of_possession", "total_passes", "total_successful_passes_excl_crosses_corners", "total_tackles", "total_touches_in_opposition_box", "total_unsuccessful_passes_excl_crosses_corners", "touches", "unsuccessful_corners_into_box", "unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_dribbles", "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "winning_goal", "yellow_cards"
+columnsToDelete <- c("position","shirt_number", "backward_passes", "goal_assists", "goal_kicks", "goals_from_inside_box", "headed_goals", "home_goals", "offsides", "open_play_passes", "overruns", "putthrough_blocked_distribution", "putthrough_blocked_distribution_won", "recoveries", "red_cards_2nd_yellow", "second_goal_assists", "shots_on_target_inc_goals", "straight_red_cards", "substitute_off", "substitute_on", "successful_crosses_corners", "successful_crosses_open_play", "successful_dribbles", "successful_launches", "successful_open_play_passes", "successful_passes_opposition_half", "successful_passes_own_half", "successful_short_passes", "tackles_lost",
+"through_balls", "times_tackled", "total_fouls_conceded", "total_fouls_won", "total_losses_of_possession", "total_passes", "total_successful_passes_excl_crosses_corners", "total_tackles", "total_touches_in_opposition_box", "total_unsuccessful_passes_excl_crosses_corners", "touches", "unsuccessful_corners_into_box", "unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_dribbles", "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "winning_goal", "yellow_cards","aerial_duels_won", "aerial_duels", "crosses_not_claimed", "duels","duels_won","duels_lost", "forward_passes", "goals_conceded_outside_box"," goals_conceded_inside_box", "ground_duels_lost", "ground_duels","ground_duels_won","key_passes_attempt_assists","penalties_faced","penalties_goals_conceded","saves_made_caught","saves_made_parried","saves_made_from_inside_box","saved_made_from_outside_box","saves_made_paried","starts","succesful_long_passes","time_played","total_clearances","unsuccessful_long_passes","unsuccessful_short_passes","catches","saves_made_from_outside_box","successful_long_passes"
 ) 
 
 GoalKeepers <- delete_columns_if_exists(GoalKeepers, columnsToDelete)
@@ -351,7 +351,7 @@ delete_columns_if_exists<- function(Defenders, columnsToDelete) {
 }
 
 
-columnsToDelete <- c("name","position","shirt_number","away_goals", "backward_passes", "foul_attempted_tackle", "gk_successful_distribution", 
+columnsToDelete <- c("position","shirt_number","away_goals", "backward_passes", "foul_attempted_tackle", "gk_successful_distribution", 
                      "goal_assists", "goal_kicks", "goals_conceded_inside_box", "goals_conceded_outside_box", 
                      "goals_from_inside_box", "goals_from_outside_box", "headed_goals", "home_goals", 
                      "key_passes_attempt_assists", "offsides", "open_play_passes", "overruns", 
@@ -410,7 +410,7 @@ delete_columns_if_exists<- function(Midfielders, columnsToDelete) {
 }
 
 
-columnsToDelete <- c("name","position","shirt_number","aerial_duels", "aerial_duels_lost", "aerial_duels_won", "clean_sheets", "goal_kicks", "goals_conceded", "goals_conceded_inside_box", "goals_conceded_outside_box", "goals_from_inside_box", "goals_from_outside_box", "headed_goals", "home_goals", "offsides", "overruns", "penalties_conceded", "penalty_goals_conceded", "putthrough_blocked_distribution", "putthrough_blocked_distribution_won", "second_goal_assists", "substitute_off", "substitute_on", "tackles_lost", "total_clearances", "total_fouls_conceded", "total_losses_of_possession", "total_red_cards", "total_touches_in_opposition_box", "total_unsuccessful_passes_excl_crosses_corners", "unsuccessful_corners_into_box", "unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_dribbles", "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_long_passes", "unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "unsuccessful_short_passes", "gk_successful_distribution", "yellow_cards", "straight_red_cards", "away_goals", "penalties_taken", "penalty_goals")
+columnsToDelete <- c("position","shirt_number","aerial_duels", "aerial_duels_lost", "aerial_duels_won", "clean_sheets", "goal_kicks", "goals_conceded", "goals_conceded_inside_box", "goals_conceded_outside_box", "goals_from_inside_box", "goals_from_outside_box", "headed_goals", "home_goals", "offsides", "overruns", "penalties_conceded", "penalty_goals_conceded", "putthrough_blocked_distribution", "putthrough_blocked_distribution_won", "second_goal_assists", "substitute_off", "substitute_on", "tackles_lost", "total_clearances", "total_fouls_conceded", "total_losses_of_possession", "total_red_cards", "total_touches_in_opposition_box", "total_unsuccessful_passes_excl_crosses_corners", "unsuccessful_corners_into_box", "unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_dribbles", "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_long_passes", "unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "unsuccessful_short_passes", "gk_successful_distribution", "yellow_cards", "straight_red_cards", "away_goals", "penalties_taken", "penalty_goals")
 
 Midfielders <- delete_columns_if_exists(Midfielders, columnsToDelete)
 
@@ -462,7 +462,7 @@ delete_columns_if_exists<- function(Forwards, columnsToDelete) {
 }
 
 
-columnsToDelete <- c("name","position","shirt_number","backward_passes", "blocked_shots", "blocks", "corners_taken_incl_short_corners", 
+columnsToDelete <- c("position","shirt_number","backward_passes", "blocked_shots", "blocks", "corners_taken_incl_short_corners", 
 "corners_won", "duels", "duels_lost", "forward_passes", "foul_attempted_tackle", 
 "foul_won_penalty", "goals_conceded", "goals_conceded_inside_box", 
 "goals_conceded_outside_box", "goals_from_inside_box", "goals_from_outside_box", 
@@ -565,80 +565,35 @@ kable(head(MatchesRM[,4:13],6),caption = "Matches Real Madrid")
 
 # Analyse de Données 
 
-## Appliquer PCA/ACP (Analyse en Composantes Principales) 
+## Calcul Performance index pour chaque groupe 
 
 
-## PCA Goalkeepers
+## GoalKeepers performance index
 
-L'Analyse en Composantes Principales (PCA) est utilisée pour réduire la dimensionnalité des données tout en conservant le maximum d'information possible.
-
-#### Standardiser les données
+dans cette etape on calcul performance index pur les gardiens. 
 
 
 ```{r}
-GK_PCA <- prcomp(GoalKeepers, scale. = TRUE)
 
-```
-
-#### Examiner les résultats de PCA
-
-```{r}
-summary(GK_PCA)
-
-variances <- summary(GK_PCA)$importance[2,]
-barplot(variances, main = "Variance expliquée par chaque composante principale", col = "lightblue", xlab = "Composantes principales", ylab = "Proportion de variance")
-
-biplot(GK_PCA, scale = 0, cex = 0.6, col = c("red", "blue"), main = "PCA : Première et Deuxième Composantes Principales")
+GoalKeepers$performance_index_gk <- GoalKeepers$appearances * 0.1 + GoalKeepers$clean_sheets * 0.4 + GoalKeepers$gk_successful_distribution * 0.1 + GoalKeepers$saves_made * 0.15 - GoalKeepers$gk_unsuccessful_distribution * 0.1  - GoalKeepers$goals_conceded * 0.35 - GoalKeepers$penalty_goals_conceded *0.1
 
 
-```
-
-## Analyse de correlation goalkeeper 
-
-###  
-
-```{r}
-GoalKeepers$performance_index <- GoalKeepers$saves_made * 0.4 + 
-                                  GoalKeepers$aerial_duels_won * 0.2 +
-                                 GoalKeepers$ground_duels_won * 0.2 -
-                                  GoalKeepers$duels_lost *0.2 -
-                                 GoalKeepers$penalty_goals_conceded *0.1 - 
-                                  GoalKeepers$clean_sheets * 0.4 -
-                                  GoalKeepers$goals_conceded * 0.3 
                                   
+```
 
 
-goalkeeper_performance_replicated <- rep(GoalKeepers$performance_index, nrow(MatchesRM))
-combined_data <- cbind(MatchesRM[, c("xGA", "BE", "Target1")], performance_index = goalkeeper_performance_replicated)
+ensuite nous mettrons les noms de joueurs dans un nouvelle dataset avec leur performance d'index 
 
-cor_matrix <- cor(combined_data, use = "complete.obs")
+```{r}
 
-print(cor_matrix)
-
-plot(combined_data$performance_index, combined_data$BE, 
-     xlab = "Performance Index", ylab = "xGA", 
-     main = "Performance Index vs xGA")
-
-
-corr_matrix <- cor(MatchesRM[, c("Target1", "BE", "xGA")], use = "complete.obs")
-print(corr_matrix)
-corrplot(corr_matrix, method = "circle", type = "upper", tl.cex = 0.8)
-
-
-GoalKeepers$MatchID <- rownames(GoalKeepers)  # Add MatchID if missing
-
-MatchesRM$MatchID <- rownames(MatchesRM)     # Add MatchID if missing
-
-
-Goalkeeper_Analysis <- merge(GoalKeepers, MatchesRM[, c("MatchID", "Target1", "BE", "xGA")], by = "MatchID")
-goalkeeper_metrics <- Goalkeeper_Analysis[, c("clean_sheets", "saves_made", "saves_made_from_inside_box", "saves_made_from_outside_box","catches","aerial_duels_won","goals_conceded")]
-target_variables <- Goalkeeper_Analysis[, c("Target1", "BE", "xGA")]
-
-# Calculate correlation
-corr_matrix <- cor(goalkeeper_metrics, target_variables, use = "complete.obs")
-print(corr_matrix)
-
-# Visualize correlation
+# Assuming GoalKeepers$data is a data frame with appropriate columns
+barplot(GoalKeepers$clean_sheets, 
+        names.arg = GoalKeepers$name, 
+        main = "Clean Sheets by Goalkeeper", 
+        xlab = "Name", 
+        ylab = "Clean Sheets", 
+        las = 2,  # Rotate x-axis labels for better readability if there are many names
+        col = "lightblue")  # Add color to make the plot visually appealing
 
 
 ```
