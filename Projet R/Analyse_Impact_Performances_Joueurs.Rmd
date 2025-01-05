@@ -27,7 +27,7 @@ geometry: top=2cm,bottom=2cm,right=2.5cm,left=2.5cm
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
+\newpage
 # Introduction
 
 Dans le domaine sportif, la performance individuelle des joueurs peut influencer directement ou indirectement les résultats globaux de leur équipe. Cependant, comprendre précisément cette relation reste un défi.
@@ -67,10 +67,22 @@ Au début de notre analyse, nous commençons par intégrer les données essentie
 ```{r Importation des données partie1, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
 # Installation de package si n'existe pas 
 if (!require(readr) ) {install.packages("readr" , repos = "http://cran.us.r-project.org")}
+if (!require(dplyr) ) {install.packages("dplyr" , repos = "http://cran.us.r-project.org")}
+if (!require(tidyr) ) {install.packages("tidyr" , repos = "http://cran.us.r-project.org")}
+if (!require(ggplot2) ) {install.packages("ggplot2" , repos = "http://cran.us.r-project.org")}
+if (!require(ggcorrplot) ) {install.packages("ggcorrplot" , repos = "http://cran.us.r-project.org")}
+if (!require(fmsb) ) {install.packages("fmsb" , repos = "http://cran.us.r-project.org")}
+if (!require(ggradar) ) {install.packages("ggradar" , repos = "http://cran.us.r-project.org")}
+if (!require(reshape2) ) {install.packages("reshape2" , repos = "http://cran.us.r-project.org")}
+if (!require(coefplot) ) {install.packages("coefplot" , repos = "http://cran.us.r-project.org")}
 
 # Chargement de package 
 library(readr)
 library(knitr)
+library(ggplot2)
+library(reshape2)
+library(corrplot)
+library(coefplot)
 
 
 # Importation de donneés depuis fichier excel 
@@ -306,6 +318,7 @@ GoalKeepers <- delete_columns_if_exists(GoalKeepers, columnsToDelete)
 print("Dimension Aprés suppression")
 dim(GoalKeepers)
 
+
 ```
 
 Répéter le processus pour toutes les positions : 
@@ -351,6 +364,7 @@ delete_columns_if_exists<- function(Defenders, columnsToDelete) {
 }
 
 
+
 columnsToDelete <- c("position","shirt_number","away_goals", "backward_passes", "foul_attempted_tackle", "gk_successful_distribution", 
                      "goal_assists", "goal_kicks", "goals_conceded_inside_box", "goals_conceded_outside_box", 
                      "goals_from_inside_box", "goals_from_outside_box", "headed_goals", "home_goals", 
@@ -360,13 +374,16 @@ columnsToDelete <- c("position","shirt_number","away_goals", "backward_passes", 
                      "straight_red_cards", "substitute_off", "substitute_on", "successful_corners_into_box", 
                      "successful_crosses_corners", "successful_crosses_open_play", "successful_dribbles", 
                      "successful_launches", "successful_layoffs", "successful_long_passes", "successful_open_play_passes", 
-                     "successful_passes_opposition_half", "through_balls","yellow_cards")
+                     "successful_passes_opposition_half", "through_balls","yellow_cards", "aerial_duels","duels", "aerial_duels_lost", "aerial_duels_won", "assists_intentional", "attempts_from_set_pieces", "blocked_shots", "corners_taken_incl_short_corners", "corners_won", "duel", "duels_lost", "duels_won", "forward_passes", "ground_duels_lost","ground_duels", "ground_duels_won", "starts", "successful_passes_own_half", "successful_short_passes", "tackles_lost", "tackles_won", "time_played", "times_tackled", "total_clearances", "total_fouls_conceded", "total_fouls_won", "total_losses_of_possession", "total_passes", "total_red_cards", "total_shots", "total_successful_passes_excl_crosses_corners", "total_tackles", "total_touches_in_opposition_box", "total_unsuccessful_passes_excl_crosses_corners", "touches", "unsuccessful_corners_into_box", "unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_dribbles", "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_long_passes" , "unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "unsuccessful_short_passes", "winning_goal"
+
+)
 
 Defenders <- delete_columns_if_exists(Defenders, columnsToDelete)
 
 
 print("Dimension Aprés suppression")
 dim(Defenders)
+
 
 ```
 - pour milieux de terrains : il est essentiel de se concentrer sur les passes, les récupérations, les dribbles et leur capacité à influencer le jeu tant offensivement que défensivement, en facilitant la transition entre les deux phases.
@@ -410,13 +427,16 @@ delete_columns_if_exists<- function(Midfielders, columnsToDelete) {
 }
 
 
-columnsToDelete <- c("position","shirt_number","aerial_duels", "aerial_duels_lost", "aerial_duels_won", "clean_sheets", "goal_kicks", "goals_conceded", "goals_conceded_inside_box", "goals_conceded_outside_box", "goals_from_inside_box", "goals_from_outside_box", "headed_goals", "home_goals", "offsides", "overruns", "penalties_conceded", "penalty_goals_conceded", "putthrough_blocked_distribution", "putthrough_blocked_distribution_won", "second_goal_assists", "substitute_off", "substitute_on", "tackles_lost", "total_clearances", "total_fouls_conceded", "total_losses_of_possession", "total_red_cards", "total_touches_in_opposition_box", "total_unsuccessful_passes_excl_crosses_corners", "unsuccessful_corners_into_box", "unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_dribbles", "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_long_passes", "unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "unsuccessful_short_passes", "gk_successful_distribution", "yellow_cards", "straight_red_cards", "away_goals", "penalties_taken", "penalty_goals")
+
+columnsToDelete <- c("position","shirt_number","aerial_duels", "aerial_duels_lost", "aerial_duels_won", "clean_sheets", "goal_kicks", "goals_conceded", "goals_conceded_inside_box", "goals_conceded_outside_box", "goals_from_inside_box", "goals_from_outside_box", "headed_goals", "home_goals", "offsides", "overruns", "penalties_conceded", "penalty_goals_conceded", "putthrough_blocked_distribution", "putthrough_blocked_distribution_won", "second_goal_assists", "substitute_off", "substitute_on", "tackles_lost", "total_clearances", "total_fouls_conceded", "total_losses_of_possession", "total_red_cards", "total_touches_in_opposition_box", "total_unsuccessful_passes_excl_crosses_corners", "unsuccessful_corners_into_box", "unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_long_passes", "unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "gk_successful_distribution", "yellow_cards", "straight_red_cards", "away_goals", "penalties_taken", "penalty_goals" , "attempts_from_set_pieces", "backward_passes", "blocked_shots", "blocks", "corners_taken_incl_short_corners", "corners_won", "duels", "duels_won", "forward_passes", "foul_attempted_tackle", "foul_won_penalty", "ground_duels", "ground_duels_lost", "ground_duels_won", "open_play_passes", "recoveries", "shots_on_target_inc_goals", "starts", "successful_corners_into_box", "successful_crosses_corners", "successful_crosses_open_play", "successful_dribbles", "successful_launches", "successful_layoffs", "successful_long_passes", "successful_open_play_passes", "successful_passes_opposition_half", "successful_passes_own_half", "successful_short_passes", "tackles_won", "through_balls", "time_played", "times_tackled", "total_fouls_won", "total_passes", "total_shots", "total_successful_passes_excl_crosses_corners", "total_tackles", "touches", "winning_goal"
+ )
 
 Midfielders <- delete_columns_if_exists(Midfielders, columnsToDelete)
 
 
 print("Dimension Aprés suppression")
 dim(Midfielders)
+
 
 ```
 - pour les attaquants: 
@@ -463,24 +483,24 @@ delete_columns_if_exists<- function(Forwards, columnsToDelete) {
 
 
 columnsToDelete <- c("position","shirt_number","backward_passes", "blocked_shots", "blocks", "corners_taken_incl_short_corners", 
-"corners_won", "duels", "duels_lost", "forward_passes", "foul_attempted_tackle", 
+"corners_won", "duels", "forward_passes", "foul_attempted_tackle", 
 "foul_won_penalty", "goals_conceded", "goals_conceded_inside_box", 
 "goals_conceded_outside_box", "goals_from_inside_box", "goals_from_outside_box", 
 "ground_duels", "ground_duels_lost", "ground_duels_won", "interceptions", 
-"key_passes_attempt_assists", "open_play_passes", "overruns", 
+"key_passes_attempt_assists", "open_play_passes", 
 "penalties_off_target", "penalty_goals_conceded", "putthrough_blocked_distribution", 
 "putthrough_blocked_distribution_won", "recoveries", "second_goal_assists", 
-"successful_corners_into_box", "successful_crosses_corners", "successful_crosses_open_play", 
-"successful_dribbles", "successful_launches", "successful_layoffs", "successful_long_passes", 
+"successful_corners_into_box", "successful_crosses_corners", "successful_crosses_open_play", "successful_launches", "successful_layoffs", "successful_long_passes", 
 "successful_open_play_passes", "successful_passes_opposition_half", 
 "successful_passes_own_half", "successful_short_passes", "tackles_lost", 
 "through_balls", "times_tackled", "total_clearances", "total_fouls_conceded", 
 "total_fouls_won", "total_losses_of_possession", "total_successful_passes_excl_crosses_corners", 
 "total_tackles", "total_touches_in_opposition_box", 
 "total_unsuccessful_passes_excl_crosses_corners", "unsuccessful_corners_into_box", 
-"unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", "unsuccessful_dribbles", 
+"unsuccessful_crosses_corners", "unsuccessful_crosses_open_play", 
 "unsuccessful_launches", "unsuccessful_layoffs", "unsuccessful_long_passes", 
-"unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "unsuccessful_short_passes"
+"unsuccessful_passes_opposition_half", "unsuccessful_passes_own_half", "unsuccessful_short_passes", "aerial_duels", "aerial_duels_lost", "aerial_duels_won",  "assists_intentional", "attempts_from_set_pieces", "away_goals", "clean_sheets",   "headed_goals", "nome_coals", "onsides", "starts", "substitute_off", "substitute_on", "tackles_won", "time_played", "total_passes", "touches", "winning_goal", "yellow_cards" ,"home_goals"
+
 )
 
 Forwards <- delete_columns_if_exists(Forwards, columnsToDelete)
@@ -488,6 +508,7 @@ Forwards <- delete_columns_if_exists(Forwards, columnsToDelete)
 
 print("Dimension Aprés suppression")
 dim(Forwards)
+
 
 ```
 ### Remplacement NA valeurs
@@ -572,31 +593,802 @@ kable(head(MatchesRM[,4:13],6),caption = "Matches Real Madrid")
 
 dans cette etape on calcul performance index pur les gardiens. 
 
+Le classement des gardiens selon leur index de performance montre clairement qu'Andrii Lunin se distingue en première, suivi par Kepa, plusieurs facteurs ont un impact sur ces résultats, tels que les apparitions, les matchs joués et les minutes passées.
 
-```{r}
+La contribution de ces éléments à la performance globale de chaque joueur est significativement influencée par leur poids dans la formule de calcul de l'index.
+
+
+```{r IndexPer - Gardiern, echo=TRUE, message=TRUE, warning=FALSE, out.width='80%', results='hold'}
 
 GoalKeepers$performance_index_gk <- GoalKeepers$appearances * 0.1 + GoalKeepers$clean_sheets * 0.4 + GoalKeepers$gk_successful_distribution * 0.1 + GoalKeepers$saves_made * 0.15 - GoalKeepers$gk_unsuccessful_distribution * 0.1  - GoalKeepers$goals_conceded * 0.35 - GoalKeepers$penalty_goals_conceded *0.1
 
-
+ggplot(GoalKeepers, aes(x = reorder(name, -performance_index_gk), y = performance_index_gk, fill = name)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Classement des gardiens par index de performance",
+    x = "Goalkeeper",
+    y = "Index de performance",
+    fill = "Goalkeeper"
+  ) +
+  theme_minimal()
                                   
 ```
 
 
-ensuite nous mettrons les noms de joueurs dans un nouvelle dataset avec leur performance d'index 
 
-```{r}
 
-# Assuming GoalKeepers$data is a data frame with appropriate columns
-barplot(GoalKeepers$clean_sheets, 
-        names.arg = GoalKeepers$name, 
-        main = "Clean Sheets by Goalkeeper", 
-        xlab = "Name", 
-        ylab = "Clean Sheets", 
-        las = 2,  # Rotate x-axis labels for better readability if there are many names
-        col = "lightblue")  # Add color to make the plot visually appealing
+
+### Index de Performance vs Apparitions
+
+
+```{r IndexPer vs Appar Gardiern, message=TRUE, warning=FALSE, out.width='80%', results='hold'}
+
+
+library(ggplot2)             # Load the package
+
+ggplot(GoalKeepers, aes(x = appearances, y = performance_index_gk)) +
+  geom_line(color = "blue", group = 1) +
+  geom_point(size = 3, aes(color = name)) +  # Use colors for each goalkeeper
+  geom_text(aes(label = name), vjust = -1, hjust = 0.5, size = 3) +  # Add labels
+  labs(
+    title = "Index de performance vs Apparitions",
+    x = "Nombre d'apparitions",
+    y = "Index de performance",
+    color = "Goalkeeper"
+  ) +
+  theme_minimal()
+
+```
+
+
+
+
+
+### Distribution des Clean Sheets et Goals Conceded
+
+Ce bar plot compare les clean sheets et les buts concédés par chaque gardien.
+
+Les joueurs ayant un nombre élevé de clean sheets et un faible nombre de buts concédés sont probablement les plus performants. 
+
+Si un joueur a peu d'apparitions mais un bon ratio de clean sheets, cela pourrait indiquer une performance clé dans des matchs spécifiques, les joueurs sans clean sheets et avec beaucoup de buts concédés peuvent refléter une utilisation limitée ou des performances moins efficaces.
+
+
+```{r DistributionGardiern, message=TRUE, warning=FALSE, out.width='80%', results='hold'}
+
+
+library(tidyr)
+library(dplyr)
+
+GoalKeepers_long <- GoalKeepers %>%
+  mutate(goals_conceded = -goals_conceded) %>% 
+  pivot_longer(cols = c(clean_sheets, goals_conceded), 
+               names_to = "metric", 
+               values_to = "value")
+
+# Bar plot with goalkeeper names
+ggplot(GoalKeepers_long, aes(x = name, y = value, fill = metric)) +
+  geom_bar(stat = "identity", position = "identity", alpha = 0.7) +
+  coord_flip() +
+  scale_fill_manual(
+    values = c("clean_sheets" = "blue", "goals_conceded" = "red"),
+    labels = c("Clean Sheets", "Goals Conceded")
+  ) +
+  labs(
+    title = "Comparaison des clean sheets et des buts concédés",
+    x = "Joueur",
+    y = "Nombre",
+    fill = "Légende"
+  ) +
+  geom_text(aes(label = ifelse(value != 0, paste0(value), "")), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  theme_minimal()
+
+```
+
+
+
+
+
+
+
+### Taux de Réussite des Distributions
+
+
+Ce nuage de points analyse la relation entre les distributions réussies et échouées des gardiens. 
+
+Le taux de réussite montre l'efficacité de chaque joueur dans la distribution du ballon. 
+
+Les gardiens avec des taux élevés, visibles dans les tons verts, démontrent une grande précision, essentielle pour maintenir le contrôle du jeu.
+
+
+```{r Taux de RéussiteGardiern, message=FALSE, warning=FALSE, echo=FALSE, out.width='80%', results='hold'}
+
+GoalKeepers <- GoalKeepers %>%
+  mutate(distribution_success_rate = 
+           gk_successful_distribution / 
+           (gk_successful_distribution + gk_unsuccessful_distribution))
+
+ggplot(GoalKeepers, aes(x = gk_unsuccessful_distribution, y = gk_successful_distribution, color = name)) +
+  geom_point(size = 3) +
+  geom_text(aes(label = name), vjust = -1, size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  labs(
+    title = "Taux de réussite des distributions des gardiens",
+    x = "Distributions échouées",
+    y = "Distributions réussies",
+    color = "Gardien"
+  ) +
+  theme_minimal()
 
 
 ```
 
 
 
+
+
+### Saves Made vs Goals Conceded
+
+Ce graphique illustre la corrélation entre les arrêts réalisés (saves made) et les buts encaissés (goals conceded) par les gardiens. 
+
+Il est clair dans l'ensemble que les gardiens qui réalisent plus d'arrêts ont tendance à encaisser plus de buts, comme le montre la ligne de régression.
+
+
+```{r SavesVsBEGardiern, echo=FALSE, warning=FALSE, out.width='80%', results='hold'}
+ggplot(GoalKeepers, aes(x = goals_conceded, y = saves_made, color = name)) +
+  geom_point(size = 3) +
+  geom_text(aes(label = name), vjust = -1, size = 3) +
+  geom_smooth(method = "lm", color = "black", se = FALSE) +
+  labs(
+    title = "Saves vs Goals Conceded",
+    x = "Goals Conceded",
+    y = "Saves Made",
+    color = "Gardien"
+  ) +
+  theme_minimal()
+
+```
+
+### Clustering Goalkeepers Based on Performance Metrics
+
+```{r clustering, echo=FALSE, warning=FALSE, message=FALSE, out.width='80%', results='hold'}
+
+clustering_data <- GoalKeepers %>%
+  select(performance_index_gk) %>%
+  scale()
+
+# K-means clustering
+set.seed(123)
+kmeans_result <- kmeans(clustering_data, centers = 3, nstart = 20)
+GoalKeepers$cluster <- as.factor(kmeans_result$cluster)
+
+# Visualization
+ggplot(GoalKeepers, aes(x = saves_made, y = goals_conceded, color = cluster)) +
+  geom_point(size = 4) +
+  geom_text(aes(label = name), vjust = -1, size = 3) +
+  labs(
+    title = "Clustering des gardiens de but en fonction de leurs performances",
+    x = "Saves Made",
+    y = "Goals Conceded",
+    color = "Cluster"
+  ) +
+  theme_minimal()
+```
+
+
+
+## Defenders performance index
+
+Le classement des défenseurs selon leur index de performance met en avant José Ignacio Fernández Iglesias comme le joueur ayant obtenu le score le plus élevé, suivi par Dani Carvajal et Antonio Rüdiger. 
+
+Ces résultats suggèrent que ces joueurs ont excellé dans plusieurs catégories clés, telles que les interventions défensives (interceptions, blocs) et leur contribution aux clean sheets.
+
+
+À l’opposé, des joueurs comme Vinícius Augusto Tobias da Silva et Jacobo Ramón affichent des scores relativement faibles, ce qui pourrait refléter un manque d’implication ou une participation limitée dans les matchs joués.
+
+
+
+Les paramètres ayant un impact négatif important, tels que les buts encaissés et les buts contre leur camp (own goals), semblent avoir significativement diminué les performances de certains défenseurs. Cependant, les actions décisives, telles que les dégagements sur la ligne et les buts marqués, ont un effet très bénéfique sur l'index
+
+
+```{r Defenders performance index, echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+
+Defenders$performance_index_def <- 
+  Defenders$appearances * 0.1 + 
+  Defenders$blocks * 0.2 + 
+  Defenders$clean_sheets * 0.3 + 
+  Defenders$clearances_off_the_line * 0.2 + 
+  Defenders$goals * 0.25 - 
+  Defenders$goals_conceded * 0.35 - 
+  Defenders$own_goal_scored * 0.5 + 
+  Defenders$interceptions * 0.2
+
+
+ggplot(Defenders, aes(x = reorder(name, -performance_index_def), y = performance_index_def, fill = name)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Classement des défenseurs par index de performance",
+    x = "Défenseur",
+    y = "Index de performance",
+    fill = "Défenseur"
+  ) +
+  theme_minimal()
+
+```
+
+
+### Clean sheat ratio
+
+```{r Clean sheat ratio-def, echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+Defenders$clean_sheet_ratio <- Defenders$clean_sheets / (Defenders$goals_conceded + 1)  # Add 1 to avoid division by zero
+
+
+ggplot(Defenders, aes(x = reorder(name, -clean_sheet_ratio), y = clean_sheet_ratio, fill = name)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Ratio clean sheets / goals concédés",
+    x = "Défenseur",
+    y = "Ratio",
+    fill = "Défenseur"
+  ) +
+  theme_minimal()
+
+
+```
+
+
+
+### Correlation entre Clean Sheets et Goals Conceded
+
+```{r CorrelationCleansheets et goalsconceded-def, echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+ggplot(Defenders, aes(x = goals_conceded, y = clean_sheets, color = name)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  labs(
+    title = "Relation entre clean sheets et goals concédés",
+    x = "Goals concédés",
+    y = "Clean sheets",
+    color = "Défenseur"
+  ) +
+  theme_minimal()
+
+
+```
+
+
+### Corrélation entre l'index de performance et les différentes statistiques
+
+
+La matrice de corrélation montre les relations entre l'index de performance des défenseurs et plusieurs métriques clés. On observe une forte corrélation positive entre l'index de performance et les variables suivantes :
+
+- Appearances (appearances) : r = 0.92
+
+ce qui indique que les joueurs qui participent à plus de matchs ont tendance à avoir un index de performance plus élevé.
+
+
+- Clean sheets : r = 0.86
+
+suggérant que les performances défensives solides (sans buts encaissés) contribuent grandement à un bon score.
+
+- Clearances off the line (dégagements sur la ligne) : =  0.87
+
+ce qui reflète l'importance des actions défensives décisives.
+
+
+- Blocs  : r = 0.76
+
+confirmant leur rôle essentiel dans la réduction des opportunités adverses.
+
+
+
+Par contre, on constate une corrélation négative pour : 
+
+- Goals conceded (buts encaissés) : r  = −0.86
+
+indiquant que les buts encaissés diminuent fortement l'index de performance.
+
+- Own goals scored (buts contre son camp) : r = −0.03
+
+
+montrant un effet légèrement négatif mais moins significatif.
+
+
+
+```{r Correlation indexPerformance et diff stat-def, echo=TRUE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+cor_matrix <- cor(Defenders[, c("appearances", "blocks", "clean_sheets", "clearances_off_the_line", "goals", 
+                                "goals_conceded", "interceptions", "own_goal_scored", "performance_index_def")], 
+                  use = "complete.obs")
+
+library(ggcorrplot)
+ggcorrplot(cor_matrix, method = "circle", type = "lower", lab = TRUE, lab_size = 3, colors = c("red", "white", "blue"))
+
+```
+
+
+### Clustering des défenseurs en fonction de l'index de performance et d'autres métriques
+
+
+
+```{r Comparaison des passes réussies-def, echo=TRUE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+clustering_data <- Defenders %>%
+  select(performance_index_def, interceptions, blocks) %>%
+  scale()
+
+# Clustering K-means
+set.seed(123)
+kmeans_result <- kmeans(clustering_data, centers = 3, nstart = 20)
+Defenders$cluster <- as.factor(kmeans_result$cluster)
+
+# Visualisation des clusters
+ggplot(Defenders, aes(x = interceptions, y = blocks, color = cluster)) +
+  geom_point(size = 4) +
+  geom_text(aes(label = name), vjust = -1, size = 3) +
+  labs(
+    title = "Clustering des défenseurs en fonction des performances",
+    x = "Interceptions",
+    y = "Blocks",
+    color = "Cluster"
+  ) +
+  theme_minimal()
+
+
+``` 
+
+
+### Top 5 défenseurs par index de performance
+
+```{r Top5-def, fig.width=8, fig.height=6, fig.align='center',  echo=TRUE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+top_5_defenders <- Defenders %>%
+  arrange(desc(performance_index_def)) %>%
+  head(5)
+
+# Visualisation des 5 meilleurs défenseurs
+ggplot(top_5_defenders, aes(x = reorder(name, -performance_index_def), y = performance_index_def, fill = name)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Top 5 défenseurs par index de performance",
+    x = "Défenseur",
+    y = "Index de performance",
+    fill = "Défenseur"
+  ) +
+  theme_minimal()
+
+```
+
+
+
+
+### Contribution des Clean Sheets par Défenseur
+
+
+```{r  Contribution-def,  fig.width=8, fig.height=6, fig.align='center',echo=FALSE, message=FALSE, warning=FALSE, out.width='80%',  results='hold'}
+
+Defenders_long <- Defenders %>%
+  pivot_longer(cols = c(clean_sheets, goals_conceded), names_to = "metric", values_to = "value")
+
+# Diagramme en barres empilées
+ggplot(Defenders_long, aes(x = name, y = value, fill = metric)) +
+  geom_bar(stat = "identity", position = "stack") +
+  coord_flip() +
+  labs(
+    title = "Clean sheets vs Buts concédés par défenseur",
+    x = "Défenseur",
+    y = "Valeurs",
+    fill = "Métrique"
+  ) +
+  theme_minimal()
+
+
+```
+
+
+## Midfielders performance index
+
+Le classement des milieux de terrain en fonction de leur index de performance montre clairement que Toni Kroos occupe la première place, suivi de Federico Valverde et Luka Modric.
+
+Ces résultats reflètent leur forte contribution dans les domaines clés tels que les passes décisives (goal assists), les passes clés (key passes), et les buts marqués. 
+
+Ces métriques ayant des pondérations élevées dans la formule, elles jouent un rôle déterminant dans leurs scores élevés
+
+
+```{r performance index-mid,  fig.width=8, fig.height=6, fig.align='center',echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+Midfielders$performance_index_mid <- 
+  Midfielders$appearances * 0.15 + 
+  Midfielders$assists_intentional * 0.25 + 
+  Midfielders$goal_assists * 0.3 + 
+  Midfielders$goals * 0.28 + 
+  Midfielders$key_passes_attempt_assists * 0.2+
+  Midfielders$interceptions *0.05
+- Midfielders$duels_lost * 0.05 - Midfielders$unsuccessful_dribbles *0.05 
+- Midfielders$unsuccessful_short_passes * 0.1 
+
+
+
+ggplot(Midfielders, aes(x = reorder(name, -performance_index_mid), y = performance_index_mid, fill = name)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Classement des défenseurs par index de performance",
+    x = "Midfielders",
+    y = "Index de performance",
+    fill = "Midfielders"
+  ) +
+  theme_minimal()
+
+```
+
+### Contribution aux Buts (Goals + Assists)
+
+
+```{r Contribution buts et assits-mid,  fig.width=8, fig.height=6, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+Midfielders_long <- Midfielders %>%
+  pivot_longer(cols = c(goals, goal_assists), names_to = "metric", values_to = "value")
+
+
+ggplot(Midfielders_long, aes(x = reorder(name, -value), y = value, fill = metric)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = value), position = position_stack(vjust = 0.5), size = 3) + # Ajouter les labels
+  coord_flip() +
+  labs(
+    title = "Contribution aux buts par milieu de terrain",
+    x = "Milieu de terrain",
+    y = "Nombre de contributions",
+    fill = "Type"
+  ) +
+  theme_minimal()
+
+```
+
+
+### Correlation entre les Metriques
+
+
+```{r Correlations-mid, fig.width=8, fig.height=6, fig.align='center', echo=TRUE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+cor_matrix <- cor(Midfielders[, c("appearances", "assists_intentional", "goal_assists", "goals", 
+                                  "key_passes_attempt_assists", "performance_index_mid")])
+
+
+library(ggcorrplot)
+ggcorrplot(cor_matrix, method = "circle", type = "lower", lab = TRUE, lab_size = 3, 
+           colors = c("red", "white", "blue")) +
+  labs(title = "Corrélations entre les métriques des milieux")
+
+```
+
+### Joueurs les plus constants
+
+
+Le graphique compare les performances individuelles des milieux de terrain en se basant sur trois métriques normalisées : les passes décisives (goal assists), les buts marqués (goals), et les passes clés tentées (key passes attempt assists).
+
+
+- Jude  Bellingham, bien qu'il occupe une position de milieu de terrain, se distingue par ses performances constantes et exceptionnelles, tant en termes de buts marqués que de passes décisives. Cette polyvalence offensive le place parmi les joueurs les plus influents, démontrant sa capacité à contribuer de manière significative à l'attaque tout en assurant son rôle au milieu du terrain.
+
+- Toni Kroos et Luka Modric se démarquent comme les joueurs les plus constants sur l’ensemble des métriques, atteignant des valeurs élevées dans presque toutes les catégories. 
+
+- Federico Valverde présente une performance solide, notamment dans les buts marqués et les passes clés, mais légèrement inférieure en passes décisives.
+
+À l’inverse, des joueurs comme Théo Zidane, Mario Martín, et Nico Paz affichent des valeurs normalisées faibles, ce qui pourrait refléter une contribution limitée ou faible implications dans les matchs.
+
+
+
+Une diversité de styles de jeu est observable : certains joueurs comme Arda Güler se concentrent davantage sur des aspects spécifiques, tandis que d'autres, comme Eduardo Camavinga, ont des performances plus équilibrées.
+
+- Ce graphique met en évidence les différences de contributions entre les milieux de terrain. Les joueurs expérimentés comme Kroos et Modric dominent grâce à leur régularité et leur influence dans plusieurs domaines du jeu, tandis que les jeunes joueurs ou ceux moins impliqués présentent des performances plus spécialisées ou limitées. Cette visualisation peut être utilisée pour identifier les points forts spécifiques de chaque joueur et optimiser leur rôle sur le terrain.
+
+
+```{r constans-mid,  fig.width=8, fig.height=6, fig.align='center', echo=TRUE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+Midfielders_norm <- Midfielders %>%
+  mutate(across(c(goals, goal_assists, key_passes_attempt_assists), ~ . / max(.), .names = "norm_{.col}"))
+
+# Boxplot pour les métriques normalisées
+Midfielders_long <- Midfielders_norm %>%
+  pivot_longer(cols = starts_with("norm"), names_to = "metric", values_to = "value")
+
+# Calculer un score total normalisé
+
+# Diagramme en barres pour les scores totaux
+ggplot(Midfielders_long, aes(x = metric, y = value, color = name, group = name)) +
+  geom_line() +
+  geom_point(size = 3) +
+  labs(
+    title = "Comparaison des performances individuelles",
+    x = "Métrique",
+    y = "Valeur normalisée",
+    color = "Milieu"
+  ) +
+  theme_minimal()
+
+
+
+```
+
+### Clustering par performance 
+
+```{r Clustering-mid,  fig.width=8, fig.height=6, fig.align='center',echo=TRUE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+clustering_data <- Midfielders %>%
+  select(goals, goal_assists, key_passes_attempt_assists, performance_index_mid) %>%
+  scale()
+
+# K-means clustering
+set.seed(123)
+kmeans_result <- kmeans(clustering_data, centers = 3, nstart = 20)
+Midfielders$cluster <- as.factor(kmeans_result$cluster)
+
+# Visualiser les clusters
+ggplot(Midfielders, aes(x = goals, y = performance_index_mid, color = cluster)) +
+  geom_point(size = 4) +
+  geom_text(aes(label = name), vjust = -1, size = 3) +
+  labs(
+    title = "Clustering des milieux en fonction des performances",
+    x = "Buts",
+    y = "Index de performance",
+    color = "Cluster"
+  ) +
+  theme_minimal()
+
+
+
+
+```
+
+
+## Forwards performance index
+```{r Forwards performance index-forwards,  fig.width=8, fig.height=6, fig.align='center', echo=TRUE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+Forwards$shots_off_targets <- Forwards$total_shots - (  Forwards$shots_on_target_inc_goals)
+Forwards$penalties_missed <- Forwards$penalties_taken - Forwards$penalty_goals
+
+
+Forwards$performance_index_fw <- 
+  Forwards$appearances * 0.1 + 
+  Forwards$goal_assists * 0.25 
+   +Forwards$successful_dribbles *0.1
+  + Forwards$duels_won *0.02
+   + Forwards$overruns * 0.08 + 
+  Forwards$goals * 0.3 - 
+  Forwards$penalties_missed * 0.2-
+  Forwards$shots_off_targets * 0.1 -
+
+ - Forwards$offsides *0.05 - Forwards$unsuccessful_dribbles *0.1
+-Forwards$penalties_missed * 0.2
+
+- Forwards$duels_lost * 0.02
+
+
+
+```
+
+
+### Classement joueurs selon performance index 
+
+
+Les attaquants sont classés dans le graphique en fonction de leur indice de performance. Rodrygo occupe la première place, suivi de Lucas Vázquez et José Luis selon les index et les metriques clés.
+
+Vinícius Júnior se situe en quatrième position, montrant une contribution notable mais légèrement inférieure à ses coéquipiers mieux classés. 
+
+Enfin, Álvaro Rodríguez et Gonzalo García occupent les dernières places, avec des scores bien plus faibles, ce qui pourrait refléter une participation limitée ou des performances moins impactantes sur le terrain.
+
+
+
+```{r classeemnt-forwards,  fig.width=8, fig.height=6, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+library(ggplot2)
+
+ggplot(Forwards, aes(x = reorder(name, -performance_index_fw), y = performance_index_fw, fill = name)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Classement des attaquants par index de performance",
+    x = "Attaquant",
+    y = "Index de performance",
+    fill = "Attaquant"
+  ) +
+  theme_minimal()
+```
+
+### Contributions des métriques à l'index de performance
+
+
+Les buts marqués (goals) et les passes décisives (goal assists) contribuent au graphique en termes de métriques principales, ainsi qu'à l'index de performance des attaquants.
+
+
+Le graphique met en évidence les rôles distincts des attaquants dans l'équipe
+Certains, tels que Vinícius et Rodrygo, combinent leur habileté à marquer et à créer des occasions, tandis que d'autres, tels que Lucas Vázquez, se concentrent davantage sur un aspect spécifique. 
+
+
+Cette visualisation permet une meilleure compréhension des contributions individuelles des joueurs et une optimisation de leur utilisation en fonction de leurs forces respectives.
+
+```{r Contributions metrics-forwards,  fig.width=8, fig.height=6, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+
+library(dplyr)
+library(tidyr)
+
+Forwards$metrics_contributions <- Forwards$goals * 0.3 + Forwards$goal_assists * 0.25
+
+# Diagramme empilé
+Forwards_long <- Forwards %>%  pivot_longer(cols = c(goals, goal_assists), names_to = "metric", values_to = "value")
+
+ggplot(Forwards_long, aes(x = reorder(name, -metrics_contributions), y = value, fill = metric)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Contributions des métriques principales à la performance",
+    x = "Attaquant",
+    y = "Contributions",
+    fill = "Métrique"
+  ) +
+  theme_minimal()
+
+
+```
+
+
+### Clustering des attaquants en fonction des performances
+
+
+```{r Clustering-forwards,   fig.width=8, fig.height=6, fig.align='center',echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+# Préparer les données pour clustering
+clustering_data <- Forwards %>%
+  select(goals, goal_assists, successful_dribbles, performance_index_fw) %>%
+  scale()
+
+set.seed(123)
+kmeans_result <- kmeans(clustering_data, centers = 3, nstart = 20)
+Forwards$cluster <- as.factor(kmeans_result$cluster)
+
+ggplot(Forwards, aes(x = goals, y = performance_index_fw, color = cluster)) +
+  geom_point(size = 4) +
+  geom_text(aes(label = name), vjust = -1, size = 3) +
+  labs(
+    title = "Clustering des attaquants en fonction des performances",
+    x = "Buts",
+    y = "Index de performance",
+    color = "Cluster"
+  ) +
+  theme_minimal()
+
+
+
+
+```
+
+
+### Calcul des corrélations entre performance index et les metriques
+
+
+```{r Correlation-forwards,  fig.width=8, fig.height=6, fig.align='center', echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+
+
+
+correlation_matrix <- cor(Forwards[, c(
+  "appearances", "goal_assists", "successful_dribbles", "duels_won", 
+  "overruns", "goals", 
+  "offsides", "unsuccessful_dribbles" , "performance_index_fw"
+)])
+
+
+ggcorrplot(
+  correlation_matrix, 
+  method = "circle",        
+  type = "lower",            
+  lab = TRUE,                
+  lab_size = 3,               
+  colors = c("red", "white", "blue"),
+  outline.color = "black",    
+  ggtheme = theme_minimal()   
+) +
+  labs(
+    title = "Corrélations des métriques des attaquants",
+    subtitle = "Inclut les métriques et l'index de performance",
+  ) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 12, hjust = 0.5),
+    plot.caption = element_text(size = 10, hjust = 1)
+  )
+
+
+
+
+
+```
+
+
+### Répartition des contributions offensives
+
+Le diagramme en secteur représente la répartition des contributions offensives pour chaque attaquant. Vinícius  Júnior et Rodrygo  se partagent une large portion des contributions offensives, soulignant leur rôle clé dans l'attaque.
+
+```{r repartition-forwards, echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+
+Forwards$total_contributions <- Forwards$goals + Forwards$goal_assists + Forwards$successful_dribbles
+Forwards$contribution_percentage <- Forwards$total_contributions / sum(Forwards$total_contributions) * 100
+
+ggplot(Forwards, aes(x = "", y = contribution_percentage, fill = name)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  labs(
+    title = "Répartition des contributions offensives par attaquant",
+    x = "",
+    y = "Pourcentage",
+    fill = "Attaquant"
+  ) +
+  theme_minimal()
+```
+
+
+
+### Analyse comparative : Efficacité des tirs 
+
+
+Le graphique examine la relation entre les tirs cadrés et non cadrés en fonction de l’index de performance des attaquants.
+
+- On observe une corrélation positive : les joueurs qui effectuent plus de tirs cadrés ont également tendance à produire davantage de tirs non cadrés.
+
+- Les joueurs avec un index de performance élevé représentés par des couleurs proches du rouge combinent généralement un grand nombre de tirs cadrés et non cadrés. Cela reflète une activité offensive plus intense.
+
+```{r Cadrés vs Non Cadrés-forwards, echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', results='hold'}
+
+ggplot(Forwards, aes(x = shots_on_target_inc_goals, y = shots_off_targets, color = performance_index_fw)) +
+  geom_point(size = 4, alpha = 0.7) +
+  scale_color_gradient(low = "green", high = "red") +
+  geom_smooth(method = "lm", se = FALSE, linetype = "dashed", color = "blue") +
+  labs(
+    title = "Efficacité des tirs : Cadrés vs Non Cadrés",
+    subtitle = "Relation entre les tirs et l'index de performance",
+    x = "Tirs cadrés",
+    y = "Tirs non cadrés",
+    color = "Performance Index"
+  ) +
+  theme_minimal()
+
+
+```
+
+
+
+
+
+Ce graphique souligne que l'activité offensive, mesurée par le nombre de tirs, joue un rôle crucial dans l'amélioration de l'index de performance. 
+
+Cependant, il souligne également la nécessité d'améliorer la précision des tirs, car une proportion élevée de tirs non cadrés peut réduire l’efficacité globale des attaquants. 
+
+Ces informations peuvent être utilisées pour identifier les joueurs qui nécessitent un entraînement spécifique afin d'optimiser leur impact dans le jeu.
+
+
+
+# Conclusion Générale et Perspective 
+
+En analysant les performances individuelles des joueurs, on a pu mettre en évidence des points clés sur leur contribution respective. 
+
+Les métriques principales, telles que les buts marqués, les passes décisives, et les actions défensives, ont révélé des rôles distincts et des niveaux d’impact variés parmi les attaquants, les milieux de terrain, les défenseurs et les gardiens. 
+
+Les joueurs comme Toni Kroos, Rodrygo Silva de Goes et Andrii Lunin ont montré une grande constance et un impact significatif dans leurs zones respectives du jeu.
+
+Ces observations renforcent l’importance d’un suivi continu des performances pour adapter les stratégies d’entraînement et de rotation.
+
+
+Pour aller plus loin, il est essentiel d'effectuer une analyse approfondie pour relier les performances individuelles à la performance collective de l'équipe. Explorer cette relation est possible grâce au dataset MatchesRM, qui est encore inexploité. Par exemple, il serait pertinent d’évaluer : 
+
+- L’impact des performances individuelles sur les résultats des matchs : Comment les contributions clés influencent-elles les victoires, les défaites, ou les nuls ?
+
+- Les dynamiques collectives : Quels joueurs interagissent le mieux ensemble et comment les combinaisons spécifiques (attaquants et milieux, défenseurs et gardiens) influencent-elles la réussite de l’équipe ?
+
+- L'impact de l'audience sur les matchs et la relation entre les résultats et les matchs à domicile ou à l'extérieur. 
+
+
+
+En intégrant l’analyse des performances individuelles et des données des matchs, il sera possible de mieux comprendre les liens entre les statistiques et les résultats collectifs, cette approche permettra de formuler des recommandations précises pour optimiser la stratégie globale de l’équipe.

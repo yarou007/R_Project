@@ -164,6 +164,8 @@ Résultats d equipe}
 \setcounter{tocdepth}{6}
 \tableofcontents
 }
+\newpage
+
 \section{Introduction}\label{introduction}
 
 Dans le domaine sportif, la performance individuelle des joueurs peut
@@ -232,10 +234,22 @@ essentielles à partir des sources distincts.
 \begin{Highlighting}[]
 \CommentTok{\# Installation de package si n\textquotesingle{}existe pas }
 \ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(readr) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"readr"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(dplyr) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"dplyr"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(tidyr) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyr"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(ggplot2) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(ggcorrplot) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggcorrplot"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(fmsb) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"fmsb"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(ggradar) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"ggradar"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(reshape2) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"reshape2"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(coefplot) ) \{}\FunctionTok{install.packages}\NormalTok{(}\StringTok{"coefplot"}\NormalTok{ , }\AttributeTok{repos =} \StringTok{"http://cran.us.r{-}project.org"}\NormalTok{)\}}
 
 \CommentTok{\# Chargement de package }
 \FunctionTok{library}\NormalTok{(readr)}
 \FunctionTok{library}\NormalTok{(knitr)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(reshape2)}
+\FunctionTok{library}\NormalTok{(corrplot)}
+\FunctionTok{library}\NormalTok{(coefplot)}
 
 
 \CommentTok{\# Importation de donneés depuis fichier excel }
@@ -711,7 +725,7 @@ de données qui ne sont pas utiles pour notre analyse :
 ## [1] "Dimension Avant suppression"
 ## [1]  6 59
 ## [1] "Dimension Aprés suppression"
-## [1]  6 32
+## [1] 6 9
 \end{verbatim}
 
 Répéter le processus pour toutes les positions :
@@ -736,7 +750,7 @@ analyse
 ## [1] "Dimension Avant suppression"
 ## [1] 11 93
 ## [1] "Dimension Aprés suppression"
-## [1] 11 53
+## [1] 11  9
 \end{verbatim}
 
 \begin{itemize}
@@ -762,7 +776,7 @@ analyse
 ## [1] "Dimension Avant suppression"
 ## [1] 12 94
 ## [1] "Dimension Aprés suppression"
-## [1] 12 47
+## [1] 12 10
 \end{verbatim}
 
 \begin{itemize}
@@ -788,7 +802,7 @@ pour leur performance offensive et leur capacité à marquer des buts:
 ## [1] "Dimension Avant suppression"
 ## [1]  6 90
 ## [1] "Dimension Aprés suppression"
-## [1]  6 27
+## [1]  6 14
 \end{verbatim}
 
 \subsubsection{Remplacement NA valeurs}\label{remplacement-na-valeurs}
@@ -941,60 +955,631 @@ D & 1 & 3 & Atlético Madrid & 1.0 & 1.4 & 63 & 69,082 & 5-3-2 & 0 \\
 
 \section{Analyse de Données}\label{analyse-de-donnuxe9es}
 
-\subsection{Appliquer PCA/ACP (Analyse en Composantes
-Principales)}\label{appliquer-pcaacp-analyse-en-composantes-principales}
+\subsection{Calcul Performance index pour chaque
+groupe}\label{calcul-performance-index-pour-chaque-groupe}
 
-\subsection{PCA Goalkeepers}\label{pca-goalkeepers}
+\subsection{GoalKeepers performance
+index}\label{goalkeepers-performance-index}
 
-L'Analyse en Composantes Principales (PCA) est utilisée pour réduire la
-dimensionnalité des données tout en conservant le maximum d'information
-possible.
+dans cette etape on calcul performance index pur les gardiens.
 
-\paragraph{Standardiser les données}\label{standardiser-les-donnuxe9es}
+Le classement des gardiens selon leur index de performance montre
+clairement qu'Andrii Lunin se distingue en première, suivi par Kepa,
+plusieurs facteurs ont un impact sur ces résultats, tels que les
+apparitions, les matchs joués et les minutes passées.
+
+La contribution de ces éléments à la performance globale de chaque
+joueur est significativement influencée par leur poids dans la formule
+de calcul de l'index.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{GK\_PCA }\OtherTok{\textless{}{-}} \FunctionTok{prcomp}\NormalTok{(GoalKeepers, }\AttributeTok{scale. =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{GoalKeepers}\SpecialCharTok{$}\NormalTok{performance\_index\_gk }\OtherTok{\textless{}{-}}\NormalTok{ GoalKeepers}\SpecialCharTok{$}\NormalTok{appearances }\SpecialCharTok{*} \FloatTok{0.1} \SpecialCharTok{+}\NormalTok{ GoalKeepers}\SpecialCharTok{$}\NormalTok{clean\_sheets }\SpecialCharTok{*} \FloatTok{0.4} \SpecialCharTok{+}\NormalTok{ GoalKeepers}\SpecialCharTok{$}\NormalTok{gk\_successful\_distribution }\SpecialCharTok{*} \FloatTok{0.1} \SpecialCharTok{+}\NormalTok{ GoalKeepers}\SpecialCharTok{$}\NormalTok{saves\_made }\SpecialCharTok{*} \FloatTok{0.15} \SpecialCharTok{{-}}\NormalTok{ GoalKeepers}\SpecialCharTok{$}\NormalTok{gk\_unsuccessful\_distribution }\SpecialCharTok{*} \FloatTok{0.1}  \SpecialCharTok{{-}}\NormalTok{ GoalKeepers}\SpecialCharTok{$}\NormalTok{goals\_conceded }\SpecialCharTok{*} \FloatTok{0.35} \SpecialCharTok{{-}}\NormalTok{ GoalKeepers}\SpecialCharTok{$}\NormalTok{penalty\_goals\_conceded }\SpecialCharTok{*}\FloatTok{0.1}
+
+\FunctionTok{ggplot}\NormalTok{(GoalKeepers, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(name, }\SpecialCharTok{{-}}\NormalTok{performance\_index\_gk), }\AttributeTok{y =}\NormalTok{ performance\_index\_gk, }\AttributeTok{fill =}\NormalTok{ name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Classement des gardiens par index de performance"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Goalkeeper"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Index de performance"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Goalkeeper"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
-\paragraph{Examiner les résultats de
-PCA}\label{examiner-les-ruxe9sultats-de-pca}
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/IndexPer - Gardiern-1}
+
+\subsubsection{Index de Performance vs
+Apparitions}\label{index-de-performance-vs-apparitions}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(GK\_PCA)}
+\FunctionTok{library}\NormalTok{(ggplot2)             }\CommentTok{\# Load the package}
+
+\FunctionTok{ggplot}\NormalTok{(GoalKeepers, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ appearances, }\AttributeTok{y =}\NormalTok{ performance\_index\_gk)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{color =} \StringTok{"blue"}\NormalTok{, }\AttributeTok{group =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =}\NormalTok{ name)) }\SpecialCharTok{+}  \CommentTok{\# Use colors for each goalkeeper}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ name), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{hjust =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}  \CommentTok{\# Add labels}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Index de performance vs Apparitions"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Nombre d\textquotesingle{}apparitions"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Index de performance"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Goalkeeper"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/IndexPer vs Appar Gardiern-1}
+
+\subsubsection{Distribution des Clean Sheets et Goals
+Conceded}\label{distribution-des-clean-sheets-et-goals-conceded}
+
+Ce bar plot compare les clean sheets et les buts concédés par chaque
+gardien.
+
+Les joueurs ayant un nombre élevé de clean sheets et un faible nombre de
+buts concédés sont probablement les plus performants.
+
+Si un joueur a peu d'apparitions mais un bon ratio de clean sheets, cela
+pourrait indiquer une performance clé dans des matchs spécifiques, les
+joueurs sans clean sheets et avec beaucoup de buts concédés peuvent
+refléter une utilisation limitée ou des performances moins efficaces.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyr)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+
+\NormalTok{GoalKeepers\_long }\OtherTok{\textless{}{-}}\NormalTok{ GoalKeepers }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{goals\_conceded =} \SpecialCharTok{{-}}\NormalTok{goals\_conceded) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{c}\NormalTok{(clean\_sheets, goals\_conceded), }
+               \AttributeTok{names\_to =} \StringTok{"metric"}\NormalTok{, }
+               \AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{)}
+
+\CommentTok{\# Bar plot with goalkeeper names}
+\FunctionTok{ggplot}\NormalTok{(GoalKeepers\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ name, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{fill =}\NormalTok{ metric)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{position =} \StringTok{"identity"}\NormalTok{, }\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}
+    \AttributeTok{values =} \FunctionTok{c}\NormalTok{(}\StringTok{"clean\_sheets"} \OtherTok{=} \StringTok{"blue"}\NormalTok{, }\StringTok{"goals\_conceded"} \OtherTok{=} \StringTok{"red"}\NormalTok{),}
+    \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Clean Sheets"}\NormalTok{, }\StringTok{"Goals Conceded"}\NormalTok{)}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Comparaison des clean sheets et des buts concédés"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Joueur"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Nombre"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Légende"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =} \FunctionTok{ifelse}\NormalTok{(value }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{, }\FunctionTok{paste0}\NormalTok{(value), }\StringTok{""}\NormalTok{)), }
+            \AttributeTok{position =} \FunctionTok{position\_stack}\NormalTok{(}\AttributeTok{vjust =} \FloatTok{0.5}\NormalTok{), }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/DistributionGardiern-1}
+
+\subsubsection{Taux de Réussite des
+Distributions}\label{taux-de-ruxe9ussite-des-distributions}
+
+Ce nuage de points analyse la relation entre les distributions réussies
+et échouées des gardiens.
+
+Le taux de réussite montre l'efficacité de chaque joueur dans la
+distribution du ballon.
+
+Les gardiens avec des taux élevés, visibles dans les tons verts,
+démontrent une grande précision, essentielle pour maintenir le contrôle
+du jeu.
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Taux de RéussiteGardiern-1}
+
+\subsubsection{Saves Made vs Goals
+Conceded}\label{saves-made-vs-goals-conceded}
+
+Ce graphique illustre la corrélation entre les arrêts réalisés (saves
+made) et les buts encaissés (goals conceded) par les gardiens.
+
+Il est clair dans l'ensemble que les gardiens qui réalisent plus
+d'arrêts ont tendance à encaisser plus de buts, comme le montre la ligne
+de régression.
+
+\begin{verbatim}
+## `geom_smooth()` using formula = 'y ~ x'
+\end{verbatim}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/SavesVsBEGardiern-1}
+
+\subsubsection{Clustering Goalkeepers Based on Performance
+Metrics}\label{clustering-goalkeepers-based-on-performance-metrics}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/clustering-1}
+
+\subsection{Defenders performance
+index}\label{defenders-performance-index}
+
+Le classement des défenseurs selon leur index de performance met en
+avant José Ignacio Fernández Iglesias comme le joueur ayant obtenu le
+score le plus élevé, suivi par Dani Carvajal et Antonio Rüdiger.
+
+Ces résultats suggèrent que ces joueurs ont excellé dans plusieurs
+catégories clés, telles que les interventions défensives (interceptions,
+blocs) et leur contribution aux clean sheets.
+
+À l'opposé, des joueurs comme Vinícius Augusto Tobias da Silva et Jacobo
+Ramón affichent des scores relativement faibles, ce qui pourrait
+refléter un manque d'implication ou une participation limitée dans les
+matchs joués.
+
+Les paramètres ayant un impact négatif important, tels que les buts
+encaissés et les buts contre leur camp (own goals), semblent avoir
+significativement diminué les performances de certains défenseurs.
+Cependant, les actions décisives, telles que les dégagements sur la
+ligne et les buts marqués, ont un effet très bénéfique sur l'index
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Defenders performance index-1}
+
+\subsubsection{Clean sheat ratio}\label{clean-sheat-ratio}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Clean sheat ratio-def-1}
+
+\subsubsection{Correlation entre Clean Sheets et Goals
+Conceded}\label{correlation-entre-clean-sheets-et-goals-conceded}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/CorrelationCleansheets et goalsconceded-def-1}
+
+\subsubsection{Corrélation entre l'index de performance et les
+différentes
+statistiques}\label{corruxe9lation-entre-lindex-de-performance-et-les-diffuxe9rentes-statistiques}
+
+La matrice de corrélation montre les relations entre l'index de
+performance des défenseurs et plusieurs métriques clés. On observe une
+forte corrélation positive entre l'index de performance et les variables
+suivantes :
+
+\begin{itemize}
+\tightlist
+\item
+  Appearances (appearances) : r = 0.92
+\end{itemize}
+
+ce qui indique que les joueurs qui participent à plus de matchs ont
+tendance à avoir un index de performance plus élevé.
+
+\begin{itemize}
+\tightlist
+\item
+  Clean sheets : r = 0.86
+\end{itemize}
+
+suggérant que les performances défensives solides (sans buts encaissés)
+contribuent grandement à un bon score.
+
+\begin{itemize}
+\tightlist
+\item
+  Clearances off the line (dégagements sur la ligne) : = 0.87
+\end{itemize}
+
+ce qui reflète l'importance des actions défensives décisives.
+
+\begin{itemize}
+\tightlist
+\item
+  Blocs : r = 0.76
+\end{itemize}
+
+confirmant leur rôle essentiel dans la réduction des opportunités
+adverses.
+
+Par contre, on constate une corrélation négative pour :
+
+\begin{itemize}
+\tightlist
+\item
+  Goals conceded (buts encaissés) : r = −0.86
+\end{itemize}
+
+indiquant que les buts encaissés diminuent fortement l'index de
+performance.
+
+\begin{itemize}
+\tightlist
+\item
+  Own goals scored (buts contre son camp) : r = −0.03
+\end{itemize}
+
+montrant un effet légèrement négatif mais moins significatif.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cor\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(Defenders[, }\FunctionTok{c}\NormalTok{(}\StringTok{"appearances"}\NormalTok{, }\StringTok{"blocks"}\NormalTok{, }\StringTok{"clean\_sheets"}\NormalTok{, }\StringTok{"clearances\_off\_the\_line"}\NormalTok{, }\StringTok{"goals"}\NormalTok{, }
+                                \StringTok{"goals\_conceded"}\NormalTok{, }\StringTok{"interceptions"}\NormalTok{, }\StringTok{"own\_goal\_scored"}\NormalTok{, }\StringTok{"performance\_index\_def"}\NormalTok{)], }
+                  \AttributeTok{use =} \StringTok{"complete.obs"}\NormalTok{)}
+
+\FunctionTok{library}\NormalTok{(ggcorrplot)}
+\FunctionTok{ggcorrplot}\NormalTok{(cor\_matrix, }\AttributeTok{method =} \StringTok{"circle"}\NormalTok{, }\AttributeTok{type =} \StringTok{"lower"}\NormalTok{, }\AttributeTok{lab =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{lab\_size =} \DecValTok{3}\NormalTok{, }\AttributeTok{colors =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"blue"}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlation indexPerformance et diff stat-def-1}
+
+\subsubsection{Clustering des défenseurs en fonction de l'index de
+performance et d'autres
+métriques}\label{clustering-des-duxe9fenseurs-en-fonction-de-lindex-de-performance-et-dautres-muxe9triques}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clustering\_data }\OtherTok{\textless{}{-}}\NormalTok{ Defenders }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(performance\_index\_def, interceptions, blocks) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{scale}\NormalTok{()}
+
+\CommentTok{\# Clustering K{-}means}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{kmeans\_result }\OtherTok{\textless{}{-}} \FunctionTok{kmeans}\NormalTok{(clustering\_data, }\AttributeTok{centers =} \DecValTok{3}\NormalTok{, }\AttributeTok{nstart =} \DecValTok{20}\NormalTok{)}
+\NormalTok{Defenders}\SpecialCharTok{$}\NormalTok{cluster }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(kmeans\_result}\SpecialCharTok{$}\NormalTok{cluster)}
+
+\CommentTok{\# Visualisation des clusters}
+\FunctionTok{ggplot}\NormalTok{(Defenders, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ interceptions, }\AttributeTok{y =}\NormalTok{ blocks, }\AttributeTok{color =}\NormalTok{ cluster)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ name), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Clustering des défenseurs en fonction des performances"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Interceptions"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Blocks"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Cluster"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Comparaison des passes réussies-def-1}
+
+\subsubsection{Top 5 défenseurs par index de
+performance}\label{top-5-duxe9fenseurs-par-index-de-performance}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{top\_5\_defenders }\OtherTok{\textless{}{-}}\NormalTok{ Defenders }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(performance\_index\_def)) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{head}\NormalTok{(}\DecValTok{5}\NormalTok{)}
+
+\CommentTok{\# Visualisation des 5 meilleurs défenseurs}
+\FunctionTok{ggplot}\NormalTok{(top\_5\_defenders, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(name, }\SpecialCharTok{{-}}\NormalTok{performance\_index\_def), }\AttributeTok{y =}\NormalTok{ performance\_index\_def, }\AttributeTok{fill =}\NormalTok{ name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{"identity"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Top 5 défenseurs par index de performance"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Défenseur"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Index de performance"}\NormalTok{,}
+    \AttributeTok{fill =} \StringTok{"Défenseur"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Top5-def-1} \end{center}
+
+\subsubsection{Contribution des Clean Sheets par
+Défenseur}\label{contribution-des-clean-sheets-par-duxe9fenseur}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Contribution-def-1} \end{center}
+
+\subsection{Midfielders performance
+index}\label{midfielders-performance-index}
+
+Le classement des milieux de terrain en fonction de leur index de
+performance montre clairement que Toni Kroos occupe la première place,
+suivi de Federico Valverde et Luka Modric.
+
+Ces résultats reflètent leur forte contribution dans les domaines clés
+tels que les passes décisives (goal assists), les passes clés (key
+passes), et les buts marqués.
+
+Ces métriques ayant des pondérations élevées dans la formule, elles
+jouent un rôle déterminant dans leurs scores élevés
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/performance index-mid-1} \end{center}
+
+\begin{verbatim}
+##  [1] -1.85 -3.50 -8.85 -2.40 -6.90 -4.95 -9.50 -4.75 -0.10 -0.25  0.00 -3.35
+##  [1]  -2.1  -9.2  -8.2  -3.9  -9.0 -14.3 -14.3 -11.3  -0.3  -0.5   0.0  -8.8
+\end{verbatim}
+
+\subsubsection{Contribution aux Buts (Goals +
+Assists)}\label{contribution-aux-buts-goals-assists}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Contribution buts et assits-mid-1} \end{center}
+
+\subsubsection{Correlation entre les
+Metriques}\label{correlation-entre-les-metriques}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cor\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{cor}\NormalTok{(Midfielders[, }\FunctionTok{c}\NormalTok{(}\StringTok{"appearances"}\NormalTok{, }\StringTok{"assists\_intentional"}\NormalTok{, }\StringTok{"goal\_assists"}\NormalTok{, }\StringTok{"goals"}\NormalTok{, }
+                                  \StringTok{"key\_passes\_attempt\_assists"}\NormalTok{, }\StringTok{"performance\_index\_mid"}\NormalTok{)])}
+
+
+\FunctionTok{library}\NormalTok{(ggcorrplot)}
+\FunctionTok{ggcorrplot}\NormalTok{(cor\_matrix, }\AttributeTok{method =} \StringTok{"circle"}\NormalTok{, }\AttributeTok{type =} \StringTok{"lower"}\NormalTok{, }\AttributeTok{lab =} \ConstantTok{TRUE}\NormalTok{, }\AttributeTok{lab\_size =} \DecValTok{3}\NormalTok{, }
+           \AttributeTok{colors =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"white"}\NormalTok{, }\StringTok{"blue"}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Corrélations entre les métriques des milieux"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlations-mid-1} \end{center}
+
+\subsubsection{Joueurs les plus
+constants}\label{joueurs-les-plus-constants}
+
+Le graphique compare les performances individuelles des milieux de
+terrain en se basant sur trois métriques normalisées : les passes
+décisives (goal assists), les buts marqués (goals), et les passes clés
+tentées (key passes attempt assists).
+
+\begin{itemize}
+\item
+  Jude Bellingham, bien qu'il occupe une position de milieu de terrain,
+  se distingue par ses performances constantes et exceptionnelles, tant
+  en termes de buts marqués que de passes décisives. Cette polyvalence
+  offensive le place parmi les joueurs les plus influents, démontrant sa
+  capacité à contribuer de manière significative à l'attaque tout en
+  assurant son rôle au milieu du terrain.
+\item
+  Toni Kroos et Luka Modric se démarquent comme les joueurs les plus
+  constants sur l'ensemble des métriques, atteignant des valeurs élevées
+  dans presque toutes les catégories.
+\item
+  Federico Valverde présente une performance solide, notamment dans les
+  buts marqués et les passes clés, mais légèrement inférieure en passes
+  décisives.
+\end{itemize}
+
+À l'inverse, des joueurs comme Théo Zidane, Mario Martín, et Nico Paz
+affichent des valeurs normalisées faibles, ce qui pourrait refléter une
+contribution limitée ou faible implications dans les matchs.
+
+Une diversité de styles de jeu est observable : certains joueurs comme
+Arda Güler se concentrent davantage sur des aspects spécifiques, tandis
+que d'autres, comme Eduardo Camavinga, ont des performances plus
+équilibrées.
+
+\begin{itemize}
+\tightlist
+\item
+  Ce graphique met en évidence les différences de contributions entre
+  les milieux de terrain. Les joueurs expérimentés comme Kroos et Modric
+  dominent grâce à leur régularité et leur influence dans plusieurs
+  domaines du jeu, tandis que les jeunes joueurs ou ceux moins impliqués
+  présentent des performances plus spécialisées ou limitées. Cette
+  visualisation peut être utilisée pour identifier les points forts
+  spécifiques de chaque joueur et optimiser leur rôle sur le terrain.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Midfielders\_norm }\OtherTok{\textless{}{-}}\NormalTok{ Midfielders }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\FunctionTok{across}\NormalTok{(}\FunctionTok{c}\NormalTok{(goals, goal\_assists, key\_passes\_attempt\_assists), }\SpecialCharTok{\textasciitilde{}}\NormalTok{ . }\SpecialCharTok{/} \FunctionTok{max}\NormalTok{(.), }\AttributeTok{.names =} \StringTok{"norm\_\{.col\}"}\NormalTok{))}
+
+\CommentTok{\# Boxplot pour les métriques normalisées}
+\NormalTok{Midfielders\_long }\OtherTok{\textless{}{-}}\NormalTok{ Midfielders\_norm }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{pivot\_longer}\NormalTok{(}\AttributeTok{cols =} \FunctionTok{starts\_with}\NormalTok{(}\StringTok{"norm"}\NormalTok{), }\AttributeTok{names\_to =} \StringTok{"metric"}\NormalTok{, }\AttributeTok{values\_to =} \StringTok{"value"}\NormalTok{)}
+
+\CommentTok{\# Calculer un score total normalisé}
+
+\CommentTok{\# Diagramme en barres pour les scores totaux}
+\FunctionTok{ggplot}\NormalTok{(Midfielders\_long, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ metric, }\AttributeTok{y =}\NormalTok{ value, }\AttributeTok{color =}\NormalTok{ name, }\AttributeTok{group =}\NormalTok{ name)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Comparaison des performances individuelles"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Métrique"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Valeur normalisée"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Milieu"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/constans-mid-1} \end{center}
+
+\subsubsection{Clustering par
+performance}\label{clustering-par-performance}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{clustering\_data }\OtherTok{\textless{}{-}}\NormalTok{ Midfielders }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(goals, goal\_assists, key\_passes\_attempt\_assists, performance\_index\_mid) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{scale}\NormalTok{()}
+
+\CommentTok{\# K{-}means clustering}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{kmeans\_result }\OtherTok{\textless{}{-}} \FunctionTok{kmeans}\NormalTok{(clustering\_data, }\AttributeTok{centers =} \DecValTok{3}\NormalTok{, }\AttributeTok{nstart =} \DecValTok{20}\NormalTok{)}
+\NormalTok{Midfielders}\SpecialCharTok{$}\NormalTok{cluster }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(kmeans\_result}\SpecialCharTok{$}\NormalTok{cluster)}
+
+\CommentTok{\# Visualiser les clusters}
+\FunctionTok{ggplot}\NormalTok{(Midfielders, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ goals, }\AttributeTok{y =}\NormalTok{ performance\_index\_mid, }\AttributeTok{color =}\NormalTok{ cluster)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{size =} \DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{label =}\NormalTok{ name), }\AttributeTok{vjust =} \SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}
+    \AttributeTok{title =} \StringTok{"Clustering des milieux en fonction des performances"}\NormalTok{,}
+    \AttributeTok{x =} \StringTok{"Buts"}\NormalTok{,}
+    \AttributeTok{y =} \StringTok{"Index de performance"}\NormalTok{,}
+    \AttributeTok{color =} \StringTok{"Cluster"}
+\NormalTok{  ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Clustering-mid-1} \end{center}
+
+\subsection{Forwards performance
+index}\label{forwards-performance-index}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Forwards}\SpecialCharTok{$}\NormalTok{shots\_off\_targets }\OtherTok{\textless{}{-}}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{total\_shots }\SpecialCharTok{{-}}\NormalTok{ (  Forwards}\SpecialCharTok{$}\NormalTok{shots\_on\_target\_inc\_goals)}
+\NormalTok{Forwards}\SpecialCharTok{$}\NormalTok{penalties\_missed }\OtherTok{\textless{}{-}}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{penalties\_taken }\SpecialCharTok{{-}}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{penalty\_goals}
+
+
+\NormalTok{Forwards}\SpecialCharTok{$}\NormalTok{performance\_index\_fw }\OtherTok{\textless{}{-}} 
+\NormalTok{  Forwards}\SpecialCharTok{$}\NormalTok{appearances }\SpecialCharTok{*} \FloatTok{0.1} \SpecialCharTok{+} 
+\NormalTok{  Forwards}\SpecialCharTok{$}\NormalTok{goal\_assists }\SpecialCharTok{*} \FloatTok{0.25} 
+   \SpecialCharTok{+}\NormalTok{Forwards}\SpecialCharTok{$}\NormalTok{successful\_dribbles }\SpecialCharTok{*}\FloatTok{0.1}
+  \SpecialCharTok{+}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{duels\_won }\SpecialCharTok{*}\FloatTok{0.02}
+   \SpecialCharTok{+}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{overruns }\SpecialCharTok{*} \FloatTok{0.08} \SpecialCharTok{+} 
+\NormalTok{  Forwards}\SpecialCharTok{$}\NormalTok{goals }\SpecialCharTok{*} \FloatTok{0.3} \SpecialCharTok{{-}} 
+\NormalTok{  Forwards}\SpecialCharTok{$}\NormalTok{penalties\_missed }\SpecialCharTok{*} \FloatTok{0.2}\SpecialCharTok{{-}}
+\NormalTok{  Forwards}\SpecialCharTok{$}\NormalTok{shots\_off\_targets }\SpecialCharTok{*} \FloatTok{0.1} \SpecialCharTok{{-}}
+
+ \SpecialCharTok{{-}}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{offsides }\SpecialCharTok{*}\FloatTok{0.05} \SpecialCharTok{{-}}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{unsuccessful\_dribbles }\SpecialCharTok{*}\FloatTok{0.1}
+\SpecialCharTok{{-}}\NormalTok{Forwards}\SpecialCharTok{$}\NormalTok{penalties\_missed }\SpecialCharTok{*} \FloatTok{0.2}
+
+\SpecialCharTok{{-}}\NormalTok{ Forwards}\SpecialCharTok{$}\NormalTok{duels\_lost }\SpecialCharTok{*} \FloatTok{0.02}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## Importance of components:
-##                           PC1    PC2     PC3       PC4      PC5       PC6
-## Standard deviation     5.1724 1.8835 1.30318 1.271e-15 2.24e-16 3.336e-32
-## Proportion of Variance 0.8361 0.1109 0.05307 0.000e+00 0.00e+00 0.000e+00
-## Cumulative Proportion  0.8361 0.9469 1.00000 1.000e+00 1.00e+00 1.000e+00
+## [1] 0.0 0.6 2.4 6.0 6.5 0.2
+## [1] 0.02 1.34 1.80 2.54 2.76 0.04
+## [1] -0.10  0.98 -0.99 -5.65 -5.44  0.00
+## [1]  0.0 -0.4  0.0 -0.2  0.0  0.0
+## [1] -0.04 -1.34 -1.38 -2.86 -3.48 -0.02
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{variances }\OtherTok{\textless{}{-}} \FunctionTok{summary}\NormalTok{(GK\_PCA)}\SpecialCharTok{$}\NormalTok{importance[}\DecValTok{2}\NormalTok{,]}
-\FunctionTok{barplot}\NormalTok{(variances, }\AttributeTok{main =} \StringTok{"Variance expliquée par chaque composante principale"}\NormalTok{, }\AttributeTok{col =} \StringTok{"lightblue"}\NormalTok{, }\AttributeTok{xlab =} \StringTok{"Composantes principales"}\NormalTok{, }\AttributeTok{ylab =} \StringTok{"Proportion de variance"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{Classement joueurs selon performance
+index}\label{classement-joueurs-selon-performance-index}
 
-\includegraphics{Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf}
+Les attaquants sont classés dans le graphique en fonction de leur indice
+de performance. Rodrygo occupe la première place, suivi de Lucas Vázquez
+et José Luis selon les index et les metriques clés.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{biplot}\NormalTok{(GK\_PCA, }\AttributeTok{scale =} \DecValTok{0}\NormalTok{, }\AttributeTok{cex =} \FloatTok{0.6}\NormalTok{, }\AttributeTok{col =} \FunctionTok{c}\NormalTok{(}\StringTok{"red"}\NormalTok{, }\StringTok{"blue"}\NormalTok{), }\AttributeTok{main =} \StringTok{"PCA : Première et Deuxième Composantes Principales"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+Vinícius Júnior se situe en quatrième position, montrant une
+contribution notable mais légèrement inférieure à ses coéquipiers mieux
+classés.
 
-\includegraphics{Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf}
+Enfin, Álvaro Rodríguez et Gonzalo García occupent les dernières places,
+avec des scores bien plus faibles, ce qui pourrait refléter une
+participation limitée ou des performances moins impactantes sur le
+terrain.
 
-\subsection{Analyse de correlation
-goalkeeper}\label{analyse-de-correlation-goalkeeper}
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/classeemnt-forwards-1} \end{center}
 
-\subsubsection{}\label{section}
+\subsubsection{Contributions des métriques à l'index de
+performance}\label{contributions-des-muxe9triques-uxe0-lindex-de-performance}
+
+Les buts marqués (goals) et les passes décisives (goal assists)
+contribuent au graphique en termes de métriques principales, ainsi qu'à
+l'index de performance des attaquants.
+
+Le graphique met en évidence les rôles distincts des attaquants dans
+l'équipe Certains, tels que Vinícius et Rodrygo, combinent leur habileté
+à marquer et à créer des occasions, tandis que d'autres, tels que Lucas
+Vázquez, se concentrent davantage sur un aspect spécifique.
+
+Cette visualisation permet une meilleure compréhension des contributions
+individuelles des joueurs et une optimisation de leur utilisation en
+fonction de leurs forces respectives.
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Contributions metrics-forwards-1} \end{center}
+
+\subsubsection{Clustering des attaquants en fonction des
+performances}\label{clustering-des-attaquants-en-fonction-des-performances}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Clustering-forwards-1} \end{center}
+
+\subsubsection{Calcul des corrélations entre performance index et les
+metriques}\label{calcul-des-corruxe9lations-entre-performance-index-et-les-metriques}
+
+\begin{center}\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlation-forwards-1} \end{center}
+
+\subsubsection{Répartition des contributions
+offensives}\label{ruxe9partition-des-contributions-offensives}
+
+Le diagramme en secteur représente la répartition des contributions
+offensives pour chaque attaquant. Vinícius Júnior et Rodrygo se
+partagent une large portion des contributions offensives, soulignant
+leur rôle clé dans l'attaque.
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/repartition-forwards-1}
+
+\subsubsection{Analyse comparative : Efficacité des
+tirs}\label{analyse-comparative-efficacituxe9-des-tirs}
+
+Le graphique examine la relation entre les tirs cadrés et non cadrés en
+fonction de l'index de performance des attaquants.
+
+\begin{itemize}
+\item
+  On observe une corrélation positive : les joueurs qui effectuent plus
+  de tirs cadrés ont également tendance à produire davantage de tirs non
+  cadrés.
+\item
+  Les joueurs avec un index de performance élevé représentés par des
+  couleurs proches du rouge combinent généralement un grand nombre de
+  tirs cadrés et non cadrés. Cela reflète une activité offensive plus
+  intense.
+\end{itemize}
+
+\includegraphics[width=0.8\linewidth]{Analyse_Impact_Performances_Joueurs_files/figure-latex/Cadrés vs Non Cadrés-forwards-1}
+
+Ce graphique souligne que l'activité offensive, mesurée par le nombre de
+tirs, joue un rôle crucial dans l'amélioration de l'index de
+performance.
+
+Cependant, il souligne également la nécessité d'améliorer la précision
+des tirs, car une proportion élevée de tirs non cadrés peut réduire
+l'efficacité globale des attaquants.
+
+Ces informations peuvent être utilisées pour identifier les joueurs qui
+nécessitent un entraînement spécifique afin d'optimiser leur impact dans
+le jeu.
+
+\section{Conclusion Générale et
+Perspective}\label{conclusion-guxe9nuxe9rale-et-perspective}
+
+En analysant les performances individuelles des joueurs, on a pu mettre
+en évidence des points clés sur leur contribution respective.
+
+Les métriques principales, telles que les buts marqués, les passes
+décisives, et les actions défensives, ont révélé des rôles distincts et
+des niveaux d'impact variés parmi les attaquants, les milieux de
+terrain, les défenseurs et les gardiens.
+
+Les joueurs comme Toni Kroos, Rodrygo Silva de Goes et Andrii Lunin ont
+montré une grande constance et un impact significatif dans leurs zones
+respectives du jeu.
+
+Ces observations renforcent l'importance d'un suivi continu des
+performances pour adapter les stratégies d'entraînement et de rotation.
+
+Pour aller plus loin, il est essentiel d'effectuer une analyse
+approfondie pour relier les performances individuelles à la performance
+collective de l'équipe. Explorer cette relation est possible grâce au
+dataset MatchesRM, qui est encore inexploité. Par exemple, il serait
+pertinent d'évaluer :
+
+\begin{itemize}
+\item
+  L'impact des performances individuelles sur les résultats des matchs :
+  Comment les contributions clés influencent-elles les victoires, les
+  défaites, ou les nuls ?
+\item
+  Les dynamiques collectives : Quels joueurs interagissent le mieux
+  ensemble et comment les combinaisons spécifiques (attaquants et
+  milieux, défenseurs et gardiens) influencent-elles la réussite de
+  l'équipe ?
+\item
+  L'impact de l'audience sur les matchs et la relation entre les
+  résultats et les matchs à domicile ou à l'extérieur.
+\end{itemize}
+
+En intégrant l'analyse des performances individuelles et des données des
+matchs, il sera possible de mieux comprendre les liens entre les
+statistiques et les résultats collectifs, cette approche permettra de
+formuler des recommandations précises pour optimiser la stratégie
+globale de l'équipe.
 
 \end{document}

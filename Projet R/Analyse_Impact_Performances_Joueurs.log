@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.15)  30 DEC 2024 23:58
+This is XeTeX, Version 3.141592653-2.6-0.999996 (TeX Live 2024) (preloaded format=xelatex 2024.12.15)  5 JAN 2025 21:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -907,134 +907,238 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 6.99925pt on input line 3.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 4.99947pt on input line 3.
-)
+
+
+[1
+
+])
 \tf@toc=\write4
 \openout4 = `Analyse_Impact_Performances_Joueurs.toc'.
 
 
 
-[1
-
-]
-LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 234.
-
-
 [2]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 236.
 
-[3]
-Overfull \hbox (1.69121pt too wide) in paragraph at lines 361--362
+
+[3] [4]
+Overfull \hbox (1.69121pt too wide) in paragraph at lines 375--376
 []\TU/lmr/m/n/10 BM  
  []
 
 
-Overfull \hbox (1.22752pt too wide) in paragraph at lines 369--370
+Overfull \hbox (1.22752pt too wide) in paragraph at lines 383--384
  []\TU/lmr/m/n/10 xGA
  []
 
 
-Overfull \hbox (1.69121pt too wide) in paragraph at lines 385--386
+Overfull \hbox (1.69121pt too wide) in paragraph at lines 399--400
 []\TU/lmr/m/n/10 BM  
  []
 
 
-Overfull \hbox (1.22752pt too wide) in paragraph at lines 393--394
+Overfull \hbox (1.22752pt too wide) in paragraph at lines 407--408
  []\TU/lmr/m/n/10 xGA
  []
 
 
-
-[4]
-Overfull \hbox (5.89397pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/7 aerial_duels_lost| 
- []
-
-
-Overfull \hbox (7.25197pt too wide) in paragraph at lines 470--470
- []\TU/lmr/m/n/7 aerial_duels_won| 
- []
-
-
-Overfull \hbox (23.91681pt too wide) in paragraph at lines 480--480
-[]\TU/lmr/bx/n/12 Suppression les lignes redundantes dans la première dataset : RealMadridPlayers 
+Overfull \vbox (66.37927pt too high) detected at line 465
  []
 
 
 
 [5]
-Overfull \hbox (5.89397pt too wide) in paragraph at lines 561--561
+Overfull \hbox (5.89397pt too wide) in paragraph at lines 484--484
  []\TU/lmr/m/n/7 aerial_duels_lost| 
  []
 
 
-Overfull \hbox (7.25197pt too wide) in paragraph at lines 561--561
+Overfull \hbox (7.25197pt too wide) in paragraph at lines 484--484
  []\TU/lmr/m/n/7 aerial_duels_won| 
+ []
+
+
+Overfull \hbox (23.91681pt too wide) in paragraph at lines 494--494
+[]\TU/lmr/bx/n/12 Suppression les lignes redundantes dans la première dataset : RealMadridPlayers 
  []
 
 
 
 [6]
+Overfull \hbox (5.89397pt too wide) in paragraph at lines 575--575
+ []\TU/lmr/m/n/7 aerial_duels_lost| 
+ []
 
-[7]
-Overfull \hbox (47.30879pt too wide) in paragraph at lines 665--673
+
+Overfull \hbox (7.25197pt too wide) in paragraph at lines 575--575
+ []\TU/lmr/m/n/7 aerial_duels_won| 
+ []
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+
+[7] [8]
+Overfull \hbox (47.30879pt too wide) in paragraph at lines 679--687
 []\TU/lmr/m/n/10 clean_sheets, blocked_shots, saves_made, saves_from_penalty, saves_made_caught, , saves_made_from_inside_box,
  []
 
 
-Overfull \hbox (80.02878pt too wide) in paragraph at lines 665--673
+Overfull \hbox (80.02878pt too wide) in paragraph at lines 679--687
 \TU/lmr/m/n/10 saves_made_from_outside_box, saves_made_parried, goal_kicks, gk_successful_distribution, gk_unsuccessful_distribution,
  []
 
 
 
-[8]
-
 [9]
 
 [10]
-Overfull \hbox (2.59662pt too wide) in paragraph at lines 888--889
- []\TU/lmr/m/n/10 BM
- []
-
-
-Overfull \hbox (2.42734pt too wide) in paragraph at lines 896--897
- []\TU/lmr/m/n/10 xGA
- []
-
-
-Overfull \hbox (2.59662pt too wide) in paragraph at lines 912--913
- []\TU/lmr/m/n/10 BM
- []
-
-
-Overfull \hbox (2.42734pt too wide) in paragraph at lines 920--921
- []\TU/lmr/m/n/10 xGA
- []
-
-
 
 [11]
-File: Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (type pdf)
-<use Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-1.pdf>
-File: Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf Graphic file (type pdf)
-<use Analyse_Impact_Performances_Joueurs_files/figure-latex/unnamed-chunk-2-2.pdf>
+Overfull \hbox (2.59662pt too wide) in paragraph at lines 902--903
+ []\TU/lmr/m/n/10 BM
+ []
+
+
+Overfull \hbox (2.42734pt too wide) in paragraph at lines 910--911
+ []\TU/lmr/m/n/10 xGA
+ []
+
+
+Overfull \hbox (2.59662pt too wide) in paragraph at lines 926--927
+ []\TU/lmr/m/n/10 BM
+ []
+
+
+Overfull \hbox (2.42734pt too wide) in paragraph at lines 934--935
+ []\TU/lmr/m/n/10 xGA
+ []
+
 
 
 [12]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/IndexPer - Gardiern-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/IndexPer - Gardiern-1.pdf>
 
-[13] (./Analyse_Impact_Performances_Joueurs.aux)
+
+[13]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/IndexPer vs Appar Gardiern-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/IndexPer vs Appar Gardiern-1.pdf>
+
+
+[14]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/DistributionGardiern-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/DistributionGardiern-1.pdf>
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Taux de RéussiteGardiern-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Taux de RéussiteGardiern-1.pdf>
+
+
+[15]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/SavesVsBEGardiern-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/SavesVsBEGardiern-1.pdf>
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/clustering-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/clustering-1.pdf>
+
+
+[16]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Defenders performance index-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Defenders performance index-1.pdf>
+
+
+[17]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Clean sheat ratio-def-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Clean sheat ratio-def-1.pdf>
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/CorrelationCleansheets et goalsconceded-def-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/CorrelationCleansheets et goalsconceded-def-1.pdf>
+
+
+[18]
+
+[19]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlation indexPerformance et diff stat-def-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlation indexPerformance et diff stat-def-1.pdf>
+
+
+[20]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Comparaison des passes réussies-def-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Comparaison des passes réussies-def-1.pdf>
+
+
+[21]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Top5-def-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Top5-def-1.pdf>
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Contribution-def-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Contribution-def-1.pdf>
+
+
+[22]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/performance index-mid-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/performance index-mid-1.pdf>
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Contribution buts et assits-mid-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Contribution buts et assits-mid-1.pdf>
+
+
+[23]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlations-mid-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlations-mid-1.pdf>
+
+
+[24]
+
+[25]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/constans-mid-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/constans-mid-1.pdf>
+
+
+[26]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Clustering-mid-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Clustering-mid-1.pdf>
+
+
+[27]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/classeemnt-forwards-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/classeemnt-forwards-1.pdf>
+
+
+[28]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Contributions metrics-forwards-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Contributions metrics-forwards-1.pdf>
+
+
+[29]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Clustering-forwards-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Clustering-forwards-1.pdf>
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlation-forwards-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Correlation-forwards-1.pdf>
+
+
+[30]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/repartition-forwards-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/repartition-forwards-1.pdf>
+
+
+[31]
+File: Analyse_Impact_Performances_Joueurs_files/figure-latex/Cadrés vs Non Cadrés-forwards-1.pdf Graphic file (type pdf)
+<use Analyse_Impact_Performances_Joueurs_files/figure-latex/Cadrés vs Non Cadrés-forwards-1.pdf>
+
+
+[32]
+
+[33] (./Analyse_Impact_Performances_Joueurs.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 1
 L3 programming layer <2024-11-02>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 21317 strings out of 475963
- 394145 string characters out of 5775530
- 973487 words of memory out of 5000000
- 43814 multiletter control sequences out of 15000+600000
+ 21605 strings out of 475963
+ 416276 string characters out of 5775530
+ 982206 words of memory out of 5000000
+ 44080 multiletter control sequences out of 15000+600000
  564626 words of font info for 90 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 90i,15n,123p,836b,579s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 90i,15n,123p,1060b,582s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Analyse_Impact_Performances_Joueurs.pdf (13 pages).
+Output written on Analyse_Impact_Performances_Joueurs.pdf (33 pages).
